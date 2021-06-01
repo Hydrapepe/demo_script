@@ -1,7 +1,7 @@
 param ([int] $Stage=1)
 function one
 {
-$action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument 'C:\\dc11.ps1 -Stage 2'
+$action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument 'C:\\dc1_1.ps1 -Stage 2'
 $trigger = New-ScheduledTaskTrigger -AtLogon
 $IntIndex = (Get-NetIPAddress|where{$_.InterfaceAlias -eq 'Ethernet0' -and $_.AddressFamily -eq 'IPv4'}).InterfaceIndex
 Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "PEPETEST1"
@@ -11,7 +11,7 @@ Rename-Computer -NewName DC1 -Force
 Restart-Computer -Force
 }
 function two 
-{$action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument 'C:\\dc11.ps1 -Stage 3'
+{$action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument 'C:\\dc1_1.ps1 -Stage 3'
 $trigger = New-ScheduledTaskTrigger -AtLogon
 Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "PEPETEST2"
 Unregister-ScheduledTask -TaskName "PEPETEST1" -Confirm:$false
@@ -22,7 +22,7 @@ Install-ADDSForest -CreateDnsDelegation:$false -DatabasePath "C:\Windows\NTDS" -
 }
 function three 
 {
-$action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument 'C:\\dc11.ps1 -Stage 4'
+$action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument 'C:\\dc1_1.ps1 -Stage 4'
 $trigger = New-ScheduledTaskTrigger -AtLogon	
 Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "PEPETEST3"	
 Unregister-ScheduledTask -TaskName "PEPETEST2" -Confirm:$false
