@@ -7,7 +7,7 @@ Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "PEPETEST1"
 $IntIndex = (Get-NetIPAddress|where{$_.InterfaceAlias -eq 'Ethernet0' -and $_.AddressFamily -eq 'IPv4'}).InterfaceIndex
 New-NetIPAddress -InterfaceIndex $IntIndex -IPAddress 172.16.19.66 –PrefixLength 26 -DefaultGateway 172.16.19.126
 Set-DnsClientServerAddress -InterfaceIndex $IntIndex -ServerAddresses 172.16.19.65, 172.16.19.66
-Rename-Computer -NewName DC1 -Force
+Rename-Computer -NewName SRV1 -Force
 Restart-Computer -Force
 }
 function two {
