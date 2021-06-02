@@ -28,13 +28,15 @@ Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "PEPETEST3"
 Unregister-ScheduledTask -TaskName "PEPETEST2" -Confirm:$false
 Add-DnsServerPrimaryZone -DynamicUpdate NonsecureAndSecure -NetworkId "172.16.19.0/24" -ReplicationScope Domain
 Add-DnsServerResourceRecordPtr -Name "65" -ZoneName "19.16.172.in-addr.arpa" -AgeRecord -PtrDomainName "$env:COMPUTERNAME.Kazan.wsr"
+Add-DnsServerResourceRecordA -Name www -IPv4Address 192.16.19.66 -ZoneName kazan.wsr -TimeToLive 01:00:00
+Add-DNSServerResourceRecordPTR -ZoneName 19.16.192.in-addr.arpa -Name 66 -PTRDomainName www.kazan.wsr
 Import-Module ServerManager
 Add-WindowsFeature –Name DHCP –IncludeManagementTools
 Add-DHCPServerSecurityGroup -ComputerName $env:COMPUTERNAME
 Restart-Service dhcpserver
 Add-DhcpServerInDC -DnsName $env:COMPUTERNAME -IPAddress 172.16.19.65
 $User = "$env:USERDOMAIN\$env:USERNAME"
-$PWord = ConvertTo-SecureString -String Windows1 -AsPlainText -Force
+$PWord = ConvertTo-SecureString -String P@ssw0rd -AsPlainText -Force
 $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord
 Set-DHCPServerDnsCredential -ComputerName $env:COMPUTERNAME -Credential $Credential
 Add-DHCPServerv4Scope -Name Pool1 -StartRange 172.16.19.68 -EndRange 172.16.19.125 -SubnetMask 255.255.255.192 -State Active
