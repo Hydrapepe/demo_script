@@ -39,7 +39,7 @@ $User = "$env:USERDOMAIN\$env:USERNAME"
 $PWord = ConvertTo-SecureString -String P@ssw0rd -AsPlainText -Force
 $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord
 Set-DHCPServerDnsCredential -ComputerName $env:COMPUTERNAME -Credential $Credential
-Add-DHCPServerv4Scope -Name Pool11 -StartRange 172.16.20.98 -EndRange 172.16.20.125 -SubnetMask 255.255.255.224 -State Active
+Add-DHCPServerv4Scope -Name Pool11 -StartRange 172.16.20.99 -EndRange 172.16.20.125 -SubnetMask 255.255.255.224 -State Active
 Set-DHCPServerv4OptionValue -ComputerName $env:COMPUTERNAME -DnsServer 172.16.20.97 -DnsDomain SPB.wse -Router 172.16.20.126
 Set-DHCPServerv4OptionValue -ComputerName $env:COMPUTERNAME -ScopeId 97 -DnsServer 172.16.20.97 -DnsDomain SPB.wse -Router 172.16.20.126
 Restart-Computer -Force
