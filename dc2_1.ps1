@@ -24,7 +24,7 @@ function three
 {
 $action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument 'C:\\dc2_1.ps1 -Stage 4'
 $trigger = New-ScheduledTaskTrigger -AtLogon	
-Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "PEPETEST3"	
+Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "PEPETEST3"
 Unregister-ScheduledTask -TaskName "PEPETEST2" -Confirm:$false
 Install-WindowsFeature -Name Web-Server -IncludeAllSubFeature -IncludeManagementTools
 Add-DnsServerPrimaryZone -DynamicUpdate NonsecureAndSecure -NetworkId "172.16.20.0/24" -ReplicationScope Domain
