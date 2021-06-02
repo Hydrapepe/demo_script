@@ -26,7 +26,9 @@ $action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument 'C:\\dc2_1
 $trigger = New-ScheduledTaskTrigger -AtLogon	
 Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "PEPETEST3"
 Unregister-ScheduledTask -TaskName "PEPETEST2" -Confirm:$false
-Install-WindowsFeature -Name Web-Server -IncludeAllSubFeature -IncludeManagementTools
+Install-WindowsFeature -name Web-Server -IncludeManagementTools
+Install-WindowsFeature -Name NET-Framework-45-ASPNET
+Enable-WindowsOptionalFeature -Online -FeatureName IIS-ManagementService
 Add-DnsServerPrimaryZone -DynamicUpdate NonsecureAndSecure -NetworkId "172.16.20.0/24" -ReplicationScope Domain
 Add-DnsServerResourceRecordPtr -Name "97" -ZoneName "20.16.172.in-addr.arpa" -AgeRecord -PtrDomainName "$env:COMPUTERNAME.spb.wsr"
 Add-DnsServerResourceRecordA -Name www -IPv4Address 172.16.20.98 -ZoneName SPB.wse -TimeToLive 01:00:00

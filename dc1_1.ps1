@@ -26,8 +26,11 @@ $action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument 'C:\\dc1_1
 $trigger = New-ScheduledTaskTrigger -AtLogon	
 Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "PEPETEST3"	
 Unregister-ScheduledTask -TaskName "PEPETEST2" -Confirm:$false
-Install-WindowsFeature -Name Web-Server -IncludeAllSubFeature -IncludeManagementTools
+Install-WindowsFeature -name Web-Server -IncludeManagementTools
+Install-WindowsFeature -Name NET-Framework-45-ASPNET
+Enable-WindowsOptionalFeature -Online -FeatureName IIS-ManagementService
 Install-WindowsFeature RemoteAccess -IncludeManagementTools
+Enable-WindowsOptionalFeature -Online -FeatureName RasRoutingProtocols -All
 Add-DnsServerPrimaryZone -DynamicUpdate NonsecureAndSecure -NetworkId "172.16.19.0/24" -ReplicationScope Domain
 Add-DnsServerResourceRecordPtr -Name "65" -ZoneName "19.16.172.in-addr.arpa" -AgeRecord -PtrDomainName "$env:COMPUTERNAME.kazan.wsr"
 Add-DnsServerResourceRecordA -Name www -IPv4Address 172.16.19.66 -ZoneName kazan.wsr -TimeToLive 01:00:00
