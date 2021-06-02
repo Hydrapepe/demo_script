@@ -6,7 +6,7 @@ $trigger = New-ScheduledTaskTrigger -AtLogon
 $IntIndex = (Get-NetIPAddress|where{$_.InterfaceAlias -eq 'Ethernet0' -and $_.AddressFamily -eq 'IPv4'}).InterfaceIndex
 Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "PEPETEST1"
 New-NetIPAddress -InterfaceIndex $IntIndex -IPAddress 172.16.20.97 -PrefixLength 27 -DefaultGateway 172.16.20.126
-Set-DnsClientServerAddress -InterfaceIndex $IntIndex -ServerAddresses 172.16.19.97
+Set-DnsClientServerAddress -InterfaceIndex $IntIndex -ServerAddresses 172.16.20.97
 Rename-Computer -NewName DC2 -Force
 Restart-Computer -Force
 }
@@ -27,7 +27,7 @@ $trigger = New-ScheduledTaskTrigger -AtLogon
 Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "PEPETEST3"	
 Unregister-ScheduledTask -TaskName "PEPETEST2" -Confirm:$false
 Add-DnsServerPrimaryZone -DynamicUpdate NonsecureAndSecure -NetworkId "172.16.20.0/24" -ReplicationScope Domain
-Add-DnsServerResourceRecordPtr -Name "97" -ZoneName "20.16.172.in-addr.arpa" -AgeRecord -PtrDomainName "$env:COMPUTERNAME.Kazan.wsr"
+Add-DnsServerResourceRecordPtr -Name "97" -ZoneName "20.16.172.in-addr.arpa" -AgeRecord -PtrDomainName "$env:COMPUTERNAME.spb.wsr"
 Add-DnsServerResourceRecordA -Name www -IPv4Address 172.16.20.98 -ZoneName SPB.wse -TimeToLive 01:00:00
 Add-DNSServerResourceRecordPTR -ZoneName 20.16.172.in-addr.arpa -Name 98 -PTRDomainName www.spb.wse
 Import-Module ServerManager
