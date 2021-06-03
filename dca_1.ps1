@@ -20,8 +20,15 @@ Add-Computer -DomainName kazan.wsr -Credential KAZAN\Administrator -restart -for
 function three {
 Import-Module ServerManager
 Install-WindowsFeature  AD-Certificate -IncludeAllSubFeature -IncludeManagementTools
+Install-WindowsFeature Adcs-Cert-Authority -IncludeManagementTools
+Add-WindowsFeature Adcs-Web-Enrollment
 Unregister-ScheduledTask -TaskName "PEPETEST2" -Confirm:$false
-
+Install-WindowsFeature -name Web-Server -IncludeManagementTools
+Install-WindowsFeature -Name NET-Framework-45-ASPNET
+Enable-WindowsOptionalFeature -Online -FeatureName IIS-ManagementService
+Install-AdcsCertificationAuthority -Credential (Get-Credential) -CACommonName "RootKazanCA" -CADistinguishedNameSuffix "DC=kazan,DC=wsr" -LogDirectory "C:\Windows\System32\CertLog" -DatabaseDirectory "C:\Windows\System32\CertLog" -CAType EnterpriseRootCa -CryptoProviderName "RSA#Microsoft Software Key Storage Provider" -KeyLength 2048 -HashAlgorithmName SHA256 -ValidityPeriod Years -ValidityPeriodUnits 8 -Force
+#Install-AdcsWebEnrollment -CAConfig "DCA.kazan.wsr\RootKazanCA" -Force
+Restart-Computer -Force
 }
 if($Stage -eq 1) 
 {
