@@ -16,7 +16,7 @@ function two {
 Unregister-ScheduledTask -TaskName "PEPETEST1" -Confirm:$false
 Install-WindowsFeature RemoteAccess -IncludeManagementTools
 Enable-WindowsOptionalFeature -Online -FeatureName RasRoutingProtocols -All
-Add-Computer -DomainName kazan.wsr -Credential KAZAN\Administrator -restart -force
+Add-Computer -DomainName SPB.wsr -Credential SPB\Administrator -restart -force
 }
 if($Stage -eq 1) 
 {
