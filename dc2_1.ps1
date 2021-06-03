@@ -30,7 +30,7 @@ Install-WindowsFeature -name Web-Server -IncludeManagementTools
 Install-WindowsFeature -Name NET-Framework-45-ASPNET
 Enable-WindowsOptionalFeature -Online -FeatureName IIS-ManagementService
 Add-DnsServerPrimaryZone -DynamicUpdate NonsecureAndSecure -NetworkId "172.16.20.0/24" -ReplicationScope Domain
-Add-DnsServerResourceRecordPtr -Name "97" -ZoneName "20.16.172.in-addr.arpa" -AgeRecord -PtrDomainName "$env:COMPUTERNAME.spb.wsr"
+Add-DnsServerResourceRecordPtr -Name "97" -ZoneName "20.16.172.in-addr.arpa" -AgeRecord -PtrDomainName "$env:COMPUTERNAME.spb.wse"
 Add-DnsServerResourceRecordA -Name www -IPv4Address 172.16.20.98 -ZoneName SPB.wse -TimeToLive 01:00:00
 Add-DNSServerResourceRecordPTR -ZoneName 20.16.172.in-addr.arpa -Name 98 -PTRDomainName www.spb.wse
 Import-Module ServerManager
@@ -50,6 +50,10 @@ Restart-Computer -Force
 function foure 
 {
 Unregister-ScheduledTask -TaskName "PEPETEST3" -Confirm:$false
+Import-Module activedirectory
+New-GPO -Name "Sleep"
+Set-GPRegistryValue -Name "Sleep" -Key "HKLM\Software\Policies\Microsoft\Power\PowerSettings" -ValueName ActivePowerScheme -Type String -Value '8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c'
+New-GPLink -Name "Sleep" -Target "DC=spb,DC=wse" 
 }
 if($Stage -eq 1) 
 {
