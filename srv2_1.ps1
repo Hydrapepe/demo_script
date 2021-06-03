@@ -18,7 +18,7 @@ Unregister-ScheduledTask -TaskName "PEPETEST1" -Confirm:$false
 Install-WindowsFeature -name Web-Server -IncludeManagementTools
 Install-WindowsFeature -Name NET-Framework-45-ASPNET
 Enable-WindowsOptionalFeature -Online -FeatureName IIS-ManagementService
-Add-Computer -DomainName spb.wse -Credential SPB\Administrator -restart -force
+Add-Computer -DomainName spb.wsr -Credential SPB\Administrator -restart -force
 }
 function three {
 Import-Module ServerManager
@@ -27,7 +27,7 @@ Install-WindowsFeature DHCP -IncludeManagementTools
 Add-DHCPServerSecurityGroup -ComputerName $env:COMPUTERNAME
 Restart-Service dhcpserver
 Install-WindowsFeature -Name AD-Domain-Services
-Install-ADDSDomainController -Credential (Get-Credential) -DomainName "spb.wse" -InstallDNS:$true -ReadOnlyReplica:$true -SiteName "Default-First-Site-Name" -Force:$true
+Install-ADDSDomainController -Credential (Get-Credential) -DomainName "spb.wsr" -InstallDNS:$true -ReadOnlyReplica:$true -SiteName "Default-First-Site-Name" -Force:$true
 }
 if($Stage -eq 1) 
 {
