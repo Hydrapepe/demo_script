@@ -1,0 +1,2 @@
+#disable firewall for remout folder editor
+netsh fi set opmode DISABLE
