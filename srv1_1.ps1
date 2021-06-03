@@ -19,7 +19,7 @@ Install-WindowsFeature -name Web-Server -IncludeManagementTools
 Install-WindowsFeature -Name NET-Framework-45-ASPNET
 Enable-WindowsOptionalFeature -Online -FeatureName IIS-ManagementService
 Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\WebManagement\Server' -Name EnableRemoteManagement -Value 1
-cmd /c 'net start wmsvc'
+sc.exe config WMSVC start= auto
 cmd /c '(echo select volume 0 && echo assign letter=P && echo select disk 1 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo select disk 2 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo select disk 3 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo select disk 4 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo create volume raid disk=1,2,3,4 && echo format fs=ntfs label="RAID" && echo assign letter=D && echo format quick) > 1.txt && diskpart /s 1.txt'
 cmd /c 'mkdir D:\shares\departments\it'
 cmd /c 'mkdir D:\shares\departments\salec'
@@ -32,9 +32,9 @@ Unregister-ScheduledTask -TaskName "PEPETEST2" -Confirm:$false
 Install-WindowsFeature DHCP -IncludeManagementTools
 Add-DHCPServerSecurityGroup -ComputerName $env:COMPUTERNAME
 Restart-Service dhcpserver
-cmd \c 'echo <html>Welcome to Kazan!</html> > C:\inetoub\wwwroot\index.html'
-Remove-item C:\inetoub\wwwroot\iisstart.htm
-Remove-item C:\inetoub\wwwroot\iisstart.png
+del C:\inetoub\wwwroot\iisstart.htm
+del C:\inetoub\wwwroot\iisstart.png
+'<html>Welcome to Kazan!</html>' > 'C:\inetpub\wwwroot\index.html'
 Install-WindowsFeature -Name AD-Domain-Services
 Install-ADDSDomainController -Credential (Get-Credential) -DomainName "kazan.wsr" -InstallDNS:$true -ReadOnlyReplica:$true -SiteName "Default-First-Site-Name" -Force:$true
 }

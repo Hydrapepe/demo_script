@@ -15,10 +15,12 @@ Unregister-ScheduledTask -TaskName "PEPETEST1" -Confirm:$false
 Install-WindowsFeature -name Web-Server -IncludeManagementTools
 Install-WindowsFeature -Name NET-Framework-45-ASPNET
 Enable-WindowsOptionalFeature -Online -FeatureName IIS-ManagementService
+Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\WebManagement\Server' -Name EnableRemoteManagement -Value 1
+sc.exe config WMSVC start= auto
 cmd /c 'mkdir C:\profiles'
-cmd \c 'echo <html>Welcome to Saint-Petersburg!</html> > C:\inetoub\wwwroot\index.html'
-Remove-item C:\inetoub\wwwroot\iisstart.htm
-Remove-item C:\inetoub\wwwroot\iisstart.png
+del C:\inetoub\wwwroot\iisstart.htm
+del C:\inetoub\wwwroot\iisstart.png
+'<html>Welcome to Saint-Petersburg!</html>' > 'C:\inetpub\wwwroot\index.html'
 Add-Computer -DomainName spb.wsr -Credential SPB\Administrator -restart -force
 }
 if($Stage -eq 1) 
