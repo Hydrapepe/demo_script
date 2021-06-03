@@ -52,6 +52,7 @@ Restart-Computer -Force
 function foure 
 {
 Unregister-ScheduledTask -TaskName "PEPETEST3" -Confirm:$false
+Start-Sleep -s 30
 Import-Module activedirectory
 New-ADOrganizationalUnit -Name "IT"
 New-ADOrganizationalUnit -Name "Sales"

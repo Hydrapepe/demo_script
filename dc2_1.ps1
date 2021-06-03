@@ -38,6 +38,11 @@ Add-WindowsFeature -Name DHCP -IncludeManagementTools
 Add-DHCPServerSecurityGroup -ComputerName $env:COMPUTERNAME
 Restart-Service dhcpserver
 Add-DhcpServerInDC -DnsName $env:COMPUTERNAME -IPAddress 172.16.20.97
+$itname ="User1"
+$itpass = "P@ssw0rd"
+$domen ="SPB.wsr"
+$itparam = ConvertTo-SecureString -String $itpass -AsPlainText -Force
+New-ADUser -Name $itname  -Enabled $true -Path 'OU=Users,DC=spb,DC=wsr' -AccountPassword $itparam -UserPrincipalName $itname@$domen
 $User = "$env:USERDOMAIN\$env:USERNAME"
 $PWord = ConvertTo-SecureString -String P@ssw0rd -AsPlainText -Force
 $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord
