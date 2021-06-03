@@ -55,8 +55,8 @@ Unregister-ScheduledTask -TaskName "PEPETEST3" -Confirm:$false
 Import-Module activedirectory
 New-ADOrganizationalUnit -Name "IT"
 New-ADOrganizationalUnit -Name "Sales"
-New-ADGroup "IT" -path 'OU=IT,DC=kazan,dc=wsr' -GroupScope Global -PassThru –Verbose
-New-ADGroup "Sales" -path 'OU=Sales,DC=kazan,dc=wsr' -GroupScope Global -PassThru –Verbose
+New-ADGroup "IT" -path 'OU=IT,DC=kazan,DC=wsr' -GroupScope Global -PassThru –Verbose
+New-ADGroup "Sales" -path 'OU=Sales,DC=kazan,DC=wsr' -GroupScope Global -PassThru –Verbose
 for ($i = 1; $i -le 30; $i++){
 $itname ="IT_" +$i
 $itpass = "P@ssw0rd" + $i
@@ -69,7 +69,32 @@ $salespass = "P@ssw0rd"+$i
 $salesparam = ConvertTo-SecureString -String $salespass -AsPlainText -Force
 New-ADUser -Name $salesname  -Enabled $true -Path 'OU=Sales,DC=kazan, DC=wsr' -AccountPassword $salesparam -UserPrincipalName $salesname@$domen
 Add-ADGroupMember -Identity Sales -Members $salesname
-}}
+}
+New-GPO -Name "First_Animation"
+Set-GPRegistryValue -Name "First_Animation" -Key "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" -ValueName EnableFirstLogonAnimation -Type DWord -Value 0
+New-GPLink -Name "First_Animation" -Target "DC=kazan,DC=wsr" 
+New-GPO -Name "Firewall"
+Set-GPRegistryValue -Name "Firewall" -Key "HKLM\Software\Policies\Microsoft\WindowsFirewall" -ValueName PolicyVersion -Type DWord -Value 541
+Set-GPRegistryValue -Name "Firewall" -Key "HKLM\Software\Policies\Microsoft\WindowsFirewall\FirewallRules" -ValueName '{39201855-FA74-4AFC-8CBD-BF4C02E57738}' -Type String -Value 'v2.28|Action=Allow|Active=TRUE|Dir=In|Protocol=1|Name=test1in|' 
+Set-GPRegistryValue -Name "Firewall" -Key "HKLM\Software\Policies\Microsoft\WindowsFirewall\FirewallRules" -ValueName '{2BC88FE6-B8D9-4DB9-AB38-989CADA48E33}' -Type String -Value 'v2.28|Action=Allow|Active=TRUE|Dir=Out|Protocol=1|Name=testout|'
+New-GPLink -Name "Firewall" -Target "DC=kazan,DC=wsr" 
+New-GPO -Name "Sleep"
+Set-GPRegistryValue -Name "Sleep" -Key "HKLM\Software\Policies\Microsoft\Power\PowerSettings" -ValueName ActivePowerScheme -Type String -Value '8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c'
+New-GPLink -Name "Sleep" -Target "DC=kazan,DC=wsr" 
+New-GPO -Name "Warning"
+Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName Enabled -Type DWord -Value 1 
+Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName ErrorMessage -Type MultiString -Value '{You do not have permissions to use this path - [Original File Path]! Do not try it again!}'
+Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName AllowEmailRequests -Type DWord -Value 1
+Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName EmailMessage -Type MultiString -Value '{}'
+Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName PutDataOwnerOnTo -Type DWord -Value 1
+Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName PutAdminOnTo -Type DWord -Value 1
+Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName AdditonalEmailTo -Type String -Value ''
+Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName IncludeDeviceClaims -Type DWord -Value 1
+Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName IncludeUserClaims -Type DWord -Value 1
+Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName GenerateLog -Type DWord -Value 1
+Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\Explorer" -ValueName EnableShellExecuteFileStreamCheck -Type DWord -Value 1
+New-GPLink -Name "Warning" -Target "DC=kazan,DC=wsr" 
+}
 if($Stage -eq 1) 
 {
 one
