@@ -83,9 +83,9 @@ Set-GPRegistryValue -Name "Sleep" -Key "HKLM\Software\Policies\Microsoft\Power\P
 New-GPLink -Name "Sleep" -Target "DC=kazan,DC=wsr" 
 New-GPO -Name "Warning"
 Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName Enabled -Type DWord -Value 1 
-Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName ErrorMessage -Type MultiString -Value '{You do not have permissions to use this path - [Original File Path]! Do not try it again!}'
+Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName ErrorMessage -Type MultiString -Value 'You do not have permissions to use this path - [Original File Path]! Do not try it again!'
 Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName AllowEmailRequests -Type DWord -Value 1
-Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName EmailMessage -Type MultiString -Value '{}'
+Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName EmailMessage -Type MultiString -Value ''
 Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName PutDataOwnerOnTo -Type DWord -Value 1
 Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName PutAdminOnTo -Type DWord -Value 1
 Set-GPRegistryValue -Name "Warning" -Key "HKLM\Software\Policies\Microsoft\Windows\ADR\AccessDenied" -ValueName AdditonalEmailTo -Type String -Value ''
