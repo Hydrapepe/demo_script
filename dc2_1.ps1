@@ -55,6 +55,7 @@ Restart-Computer -Force
 function foure 
 {
 Unregister-ScheduledTask -TaskName "PEPETEST3" -Confirm:$false
+cmd /c 'net user Administrator P@ssw0rd /domain' 
 Import-Module activedirectory
 New-GPO -Name "Sleep"
 Set-GPRegistryValue -Name "Sleep" -Key "HKLM\Software\Policies\Microsoft\Power\PowerSettings" -ValueName ActivePowerScheme -Type String -Value '8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c'
