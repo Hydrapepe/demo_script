@@ -26,9 +26,6 @@ $action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument 'C:\\dc2_1
 $trigger = New-ScheduledTaskTrigger -AtLogon	
 Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "PEPETEST3"
 Unregister-ScheduledTask -TaskName "PEPETEST2" -Confirm:$false
-Install-WindowsFeature -name Web-Server -IncludeManagementTools
-Install-WindowsFeature -Name NET-Framework-45-ASPNET
-Enable-WindowsOptionalFeature -Online -FeatureName IIS-ManagementService
 Add-DnsServerPrimaryZone -DynamicUpdate NonsecureAndSecure -NetworkId "172.16.20.0/24" -ReplicationScope Domain
 Add-DnsServerResourceRecordPtr -Name "97" -ZoneName "20.16.172.in-addr.arpa" -AgeRecord -PtrDomainName "$env:COMPUTERNAME.spb.wsr"
 Add-DnsServerResourceRecordA -Name www -IPv4Address 172.16.20.98 -ZoneName SPB.wsr -TimeToLive 01:00:00
@@ -56,15 +53,6 @@ function foure
 {
 Unregister-ScheduledTask -TaskName "PEPETEST3" -Confirm:$false
 cmd /c 'net user Administrator P@ssw0rd /domain' 
-Import-Module activedirectory
-New-GPO -Name "Sleep"
-Set-GPRegistryValue -Name "Sleep" -Key "HKLM\Software\Policies\Microsoft\Power\PowerSettings" -ValueName ActivePowerScheme -Type String -Value '8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c'
-New-GPLink -Name "Sleep" -Target "DC=spb,DC=wsr" 
-New-GPO -Name "Firewall"
-Set-GPRegistryValue -Name "Firewall" -Key "HKLM\Software\Policies\Microsoft\WindowsFirewall" -ValueName PolicyVersion -Type DWord -Value 541
-Set-GPRegistryValue -Name "Firewall" -Key "HKLM\Software\Policies\Microsoft\WindowsFirewall\FirewallRules" -ValueName '{39201855-FA74-4AFC-8CBD-BF4C02E57738}' -Type String -Value 'v2.28|Action=Allow|Active=TRUE|Dir=In|Protocol=1|Name=test1in|' 
-Set-GPRegistryValue -Name "Firewall" -Key "HKLM\Software\Policies\Microsoft\WindowsFirewall\FirewallRules" -ValueName '{2BC88FE6-B8D9-4DB9-AB38-989CADA48E33}' -Type String -Value 'v2.28|Action=Allow|Active=TRUE|Dir=Out|Protocol=1|Name=testout|'
-New-GPLink -Name "Firewall" -Target "DC=spb,DC=wsr" 
 }
 if($Stage -eq 1) 
 {
