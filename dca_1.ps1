@@ -18,11 +18,11 @@ Unregister-ScheduledTask -TaskName "PEPETEST1" -Confirm:$false
 Add-Computer -DomainName kazan.wsr -Credential KAZAN\Administrator -restart -force
 }
 function three {
+Unregister-ScheduledTask -TaskName "PEPETEST2" -Confirm:$false
 Import-Module ServerManager
 Install-WindowsFeature  AD-Certificate -IncludeAllSubFeature -IncludeManagementTools
 Install-WindowsFeature Adcs-Cert-Authority -IncludeManagementTools
 Add-WindowsFeature Adcs-Web-Enrollment
-Unregister-ScheduledTask -TaskName "PEPETEST2" -Confirm:$false
 Install-WindowsFeature -name Web-Server -IncludeManagementTools
 Install-WindowsFeature -Name NET-Framework-45-ASPNET
 Enable-WindowsOptionalFeature -Online -FeatureName IIS-ManagementService
