@@ -8,5 +8,5 @@ after_build:
       move cb\*.iso .
 
 artifacts:
-  - path: *.iso
+  - path: output.iso
     name: iso
