@@ -26,7 +26,7 @@ Add-WindowsFeature Adcs-Web-Enrollment
 Install-WindowsFeature -name Web-Server -IncludeManagementTools
 Install-WindowsFeature -Name NET-Framework-45-ASPNET
 Enable-WindowsOptionalFeature -Online -FeatureName IIS-ManagementService
-Install-AdcsCertificationAuthority -Credential (Get-Credential) -CACommonName "RootKazanCA" -CADistinguishedNameSuffix "DC=kazan,DC=wsr" -LogDirectory "C:\Windows\System32\CertLog" -DatabaseDirectory "C:\Windows\System32\CertLog" -CAType EnterpriseRootCa -CryptoProviderName "RSA#Microsoft Software Key Storage Provider" -KeyLength 2048 -HashAlgorithmName SHA256 -ValidityPeriod Years -ValidityPeriodUnits 8 -Force
+Install-AdcsCertificationAuthority -Credential KAZAN\Administrator -CACommonName "RootKazanCA" -CADistinguishedNameSuffix "DC=kazan,DC=wsr" -LogDirectory "C:\Windows\System32\CertLog" -DatabaseDirectory "C:\Windows\System32\CertLog" -CAType EnterpriseRootCa -CryptoProviderName "RSA#Microsoft Software Key Storage Provider" -KeyLength 2048 -HashAlgorithmName SHA256 -ValidityPeriod Years -ValidityPeriodUnits 8 -Force
 Restart-Computer -Force
 }
 if($Stage -eq 1) 
