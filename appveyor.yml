@@ -1,0 +1,9 @@
+skip_tags: true
+
+build_script:
+  - cmd: script.bat
+
+after_build:
+  - cmd: |
+          echo "hut"
+
