@@ -3,10 +3,6 @@ skip_tags: true
 build_script:
   - cmd: script.bat
 
-after_build:
-  - cmd: |
-      move cb\*.iso .
-
 artifacts:
   - path: output.iso
     name: iso
