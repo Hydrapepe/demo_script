@@ -28,7 +28,7 @@ Install-WindowsFeature DHCP -IncludeManagementTools
 Add-DHCPServerSecurityGroup -ComputerName $env:COMPUTERNAME
 Restart-Service dhcpserver
 Install-WindowsFeature -Name AD-Domain-Services
-Install-ADDSDomainController -Credential (Get-Credential) -DomainName "kazan.wsr" -InstallDNS:$true -ReadOnlyReplica:$true -SiteName "Default-First-Site-Name" -Force:$true
+Install-ADDSDomainController -Credential SPB\Administrator -DomainName "kazan.wsr" -InstallDNS:$true -ReadOnlyReplica:$true -SiteName "Default-First-Site-Name" -Force:$true
 }
 if($Stage -eq 1) 
 {
