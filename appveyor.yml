@@ -4,5 +4,5 @@ build_script:
   - cmd: script.bat
 
 artifacts:
-  - path: output.iso
+  - path: cb\output.iso
     name: iso
