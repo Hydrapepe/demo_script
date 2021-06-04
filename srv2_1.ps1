@@ -12,12 +12,7 @@ Restart-Computer -Force
 }
 function two {
 Unregister-ScheduledTask -TaskName "PEPETEST1" -Confirm:$false
-Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\WebManagement\Server' -Name EnableRemoteManagement -Value 1
-sc.exe config WMSVC start= auto
 cmd /c 'mkdir C:\profiles'
-<#del C:\inetoub\wwwroot\iisstart.htm
-del C:\inetoub\wwwroot\iisstart.png
-'<html>Welcome to Saint-Petersburg!</html>' > 'C:\inetpub\wwwroot\index.html'#>
 Add-Computer -DomainName spb.wsr -Credential SPB\Administrator -restart -force
 }
 if($Stage -eq 1) 
