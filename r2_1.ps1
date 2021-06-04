@@ -1,7 +1,7 @@
 param ([int] $Stage=1)
 function one
 {
-$action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument 'C:\\r1_1.ps1 -Stage 2'
+$action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument 'C:\\r2_1.ps1 -Stage 2'
 $trigger = New-ScheduledTaskTrigger -AtLogon	
 Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "PEPETEST1"
 $IntIndex = (Get-NetIPAddress|where{$_.InterfaceAlias -eq 'Ethernet0' -and $_.AddressFamily -eq 'IPv4'}).InterfaceIndex
