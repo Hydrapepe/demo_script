@@ -1,4 +1,0 @@
-os: windows
-language: generic
-script:
-start script.bat
