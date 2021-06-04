@@ -27,17 +27,14 @@ cmd /c 'mkdir D:\shares\it'
 Add-Computer -DomainName kazan.wsr -Credential KAZAN\Administrator -restart -force
 }
 function three {
-$User = "$env:USERDOMAIN\$env:USERNAME"
-$PWord = ConvertTo-SecureString -String P@ssw0rd -AsPlainText -Force
-$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord
 Import-Module ServerManager
 Unregister-ScheduledTask -TaskName "PEPETEST2" -Confirm:$false
-Add-WindowsFeature –Name AD-Domain-Services –IncludeAllSubFeature –IncludeManagementTools
-Import-Module ADDSDeployment
-Install-ADDSDomainController -NoRebootOnCompletion:$true -DomainName "kazan.wsr" -DatabasePath "C:\Windows\NTDS" -LogPath "C:\Windows\NTDS" -SysvolPath "C:\Windows\SYSVOL" -Credential $Credential -InstallDNS:$true -ReadOnlyReplica:$true -NoGlobalCatalog:$false -Force:$true -SafeModeAdministratorPassword (convertto-securestring P@ssw0rd -asplaintext -force)
 Install-WindowsFeature DHCP -IncludeManagementTools
 Add-DHCPServerSecurityGroup -ComputerName $env:COMPUTERNAME
-Restart-Computer -Force
+Restart-Service dhcpserver
+Add-WindowsFeature –Name AD-Domain-Services –IncludeAllSubFeature –IncludeManagementTools
+Import-Module ADDSDeployment
+Install-ADDSDomainController -DomainName "kazan.wsr" -DatabasePath "C:\Windows\NTDS" -LogPath "C:\Windows\NTDS" -SysvolPath "C:\Windows\SYSVOL" -Credential (Get-Credential KAZAN\Administrator) -InstallDNS:$true -ReadOnlyReplica:$true -NoGlobalCatalog:$false -Force:$true -SafeModeAdministratorPassword (convertto-securestring P@ssw0rd -asplaintext -force)
 }
 if($Stage -eq 1) 
 {
