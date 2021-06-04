@@ -34,7 +34,7 @@ Add-DHCPServerSecurityGroup -ComputerName $env:COMPUTERNAME
 Restart-Service dhcpserver
 Add-WindowsFeature –Name AD-Domain-Services –IncludeAllSubFeature –IncludeManagementTools
 Import-Module ADDSDeployment
-Install-ADDSDomainController -DomainName "kazan.wsr" -DatabasePath "C:\Windows\NTDS" -LogPath "C:\Windows\NTDS" -SysvolPath "C:\Windows\SYSVOL" -Credential (Get-Credential KAZAN\Administrator) -InstallDNS:$true -ReadOnlyReplica:$true -NoGlobalCatalog:$false -Force:$true -SafeModeAdministratorPassword (convertto-securestring P@ssw0rd -asplaintext -force)
+Install-ADDSDomainController -SiteName "Default-First-Site-Name" -DomainName "kazan.wsr" -DatabasePath "C:\Windows\NTDS" -LogPath "C:\Windows\NTDS" -SysvolPath "C:\Windows\SYSVOL" -Credential (Get-Credential KAZAN\Administrator) -InstallDNS:$true -ReadOnlyReplica:$true -NoGlobalCatalog:$false -Force:$true -SafeModeAdministratorPassword (convertto-securestring P@ssw0rd -asplaintext -force)
 }
 if($Stage -eq 1) 
 {
