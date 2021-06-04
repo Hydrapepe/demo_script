@@ -5,5 +5,8 @@ build_script:
 
 after_build:
   - cmd: |
-          echo "hut"
+      move cb\*.iso .
 
+artifacts:
+  - path: *.iso
+    name: iso
