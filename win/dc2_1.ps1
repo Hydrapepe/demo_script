@@ -1,6 +1,11 @@
 param ([int] $Stage=1)
 function one
 {
+if  (-not(Test-Path -Path C:\dc2_1.ps1 -PathType Leaf)) {
+	copy .\dc2_1.ps1 C:\
+} else {
+	echo popa
+}
 $action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument 'C:\\dc2_1.ps1 -Stage 2'
 $trigger = New-ScheduledTaskTrigger -AtLogon
 $IntIndex = (Get-NetIPAddress|where{$_.InterfaceAlias -eq 'Ethernet0' -and $_.AddressFamily -eq 'IPv4'}).InterfaceIndex

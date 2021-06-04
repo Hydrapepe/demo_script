@@ -1,6 +1,11 @@
 param ([int] $Stage=1)
 function one
 {
+if  (-not(Test-Path -Path C:\r2_1.ps1 -PathType Leaf)) {
+	copy .\r2_1.ps1 C:\
+} else {
+	echo popa
+}
 $action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument 'C:\\r2_1.ps1 -Stage 2'
 $trigger = New-ScheduledTaskTrigger -AtLogon	
 Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "PEPETEST1"
