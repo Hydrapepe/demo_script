@@ -1,9 +1,12 @@
 #disable firewall for remout folder editor
 netsh fi set opmode DISABLE
 
-
+#SRV1-2
 Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\WebManagement\Server' -Name EnableRemoteManagement -Value 1
 sc.exe config WMSVC start= auto
 del C:\inetpub\wwwroot\iisstart.htm
 del C:\inetpub\wwwroot\iisstart.png
 '<html>Welcome to Kazan!</html>' > 'C:\inetpub\wwwroot\index.html'
+
+
+Import-PfxCertificate -FilePath c:\sslcert.pfx -CertStoreLocation Cert:\LocalMachine\My\ -Password (ConvertTo-SecureString 'P@ssw0rd' -AsPlainText -Force)
