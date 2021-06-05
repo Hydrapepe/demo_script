@@ -27,6 +27,9 @@ cmd /c 'mkdir D:\shares\it'
 Add-Computer -DomainName kazan.wsr -Credential KAZAN\Administrator -restart -force
 }
 function three {
+$User = "KAZAN\Administrator"
+$PWord = ConvertTo-SecureString -String P@ssw0rd -AsPlainText -Force
+$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord
 Import-Module ServerManager
 Unregister-ScheduledTask -TaskName "PEPETEST2" -Confirm:$false
 Install-WindowsFeature DHCP -IncludeManagementTools
@@ -34,7 +37,7 @@ Add-DHCPServerSecurityGroup -ComputerName $env:COMPUTERNAME
 Restart-Service dhcpserver
 Add-WindowsFeature –Name AD-Domain-Services –IncludeAllSubFeature –IncludeManagementTools
 Import-Module ADDSDeployment
-Install-ADDSDomainController -SiteName "Default-First-Site-Name" -DomainName "kazan.wsr" -DatabasePath "C:\Windows\NTDS" -LogPath "C:\Windows\NTDS" -SysvolPath "C:\Windows\SYSVOL" -Credential (Get-Credential KAZAN\Administrator) -InstallDNS:$true -ReadOnlyReplica:$true -NoGlobalCatalog:$false -Force:$true -SafeModeAdministratorPassword (convertto-securestring P@ssw0rd -asplaintext -force)
+Install-ADDSDomainController -NoGlobalCatalog:$false -Credential $Credential -CriticalReplicationOnly:$false -DatabasePath "C:\Windows\NTDS" -DelegatedAdministratorAccountName "KAZAN\Administrator" -DomainName "kazan.wsr" -InstallDns:$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:$false -ReadOnlyReplica:$true -ReplicationSourceDC "DC1.kazan.wsr" -SiteName "Default-First-Site-Name" -SysvolPath "C:\Windows\SYSVOL" -Force:$true
 }
 if($Stage -eq 1) 
 {
