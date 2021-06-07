@@ -3,14 +3,14 @@ hostnamectl set-hostname R-CLI
 mkdir repos
 mv /etc/yum.repos.d/CentOS-* ./repos/
 cp ./repos/CentOS-Media.repo /etc/yum.repos.d/
-echo "[c7-media]
-name=CentOS-$releasever - Media
-baseurl=file:///media/CentOS/
-        file:///media/cdrom/
-        file:///media/cdrecorder/
-gpgcheck=1
-enabled=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7" > /etc/yum.repos.d/CentOS-Media.repo
+echo "[c7-media]" > /etc/yum.repos.d/CentOS-Media.repo
+echo "name=CentOS-7 - Media" >> /etc/yum.repos.d/CentOS-Media.repo
+echo "baseurl=file:///media/CentOS/" >> /etc/yum.repos.d/CentOS-Media.repo
+echo "        file:///media/cdrom/" >> /etc/yum.repos.d/CentOS-Media.repo
+echo "        file:///media/cdrecorder/" >> /etc/yum.repos.d/CentOS-Media.repo
+echo "gpgcheck=1" >> /etc/yum.repos.d/CentOS-Media.repo
+echo "enabled=1" >> /etc/yum.repos.d/CentOS-Media.repo
+echo "gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7" >> /etc/yum.repos.d/CentOS-Media.repo
 mkdir /media/cdrom
 mkdir /media/CentOS
 mount /dev/sr0 /media/cdrom
