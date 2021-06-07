@@ -53,6 +53,12 @@ function foure
 {
 Unregister-ScheduledTask -TaskName "PEPETEST3" -Confirm:$false
 cmd /c 'net user Administrator P@ssw0rd /domain' 
+Import-Module activedirectory
+New-GPO -Name "ICMP"
+Set-GPRegistryValue -Name "ICMP" -Key "HKLM\Software\Policies\Microsoft\WindowsFirewall" -ValueName PolicyVersion -Type DWord -Value 541
+Set-GPRegistryValue -Name "ICMP" -Key "HKLM\Software\Policies\Microsoft\WindowsFirewall\FirewallRules" -ValueName '{39201855-FA74-4AFC-8CBD-BF4C02E57738}' -Type String -Value 'v2.28|Action=Allow|Active=TRUE|Dir=In|Protocol=1|Name=test1in|' 
+Set-GPRegistryValue -Name "ICMP" -Key "HKLM\Software\Policies\Microsoft\WindowsFirewall\FirewallRules" -ValueName '{2BC88FE6-B8D9-4DB9-AB38-989CADA48E33}' -Type String -Value 'v2.28|Action=Allow|Active=TRUE|Dir=Out|Protocol=1|Name=testout|'
+New-GPLink -Name "ICMP" -Target "DC=spb,DC=wsr" 
 }
 if($Stage -eq 1) 
 {
