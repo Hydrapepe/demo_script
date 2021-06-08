@@ -1,4 +1,5 @@
 #!/bin/bash
+systemctl disable --now apparmor
 apt-cdrom add
 hostnamectl set-hostname L-FW
 apt install -y tcpdump net-tools curl vim lynx isc-dhcp-common dnsutils nfs-common cifs-utils sshpass openssh-server bash-completion
