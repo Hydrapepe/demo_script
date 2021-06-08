@@ -16,3 +16,39 @@ echo "10.10.10.10     isp" >> /etc/hosts
 sed '/hosts/d' -i /etc/nsswitch.conf
 echo -e 'hosts:\tdns files' >> /etc/nsswitch.conf
 sysctl -w net.ipv4.ip_forward=1 >> /etc/sysctl.conf
+
+echo -e "auto lo
+iface lo inet loopback
+
+auto ens192
+iface ens192 inet static
+address 10.10.10.1
+netmask 255.255.255.0
+gateway 10.10.10.10
+nameservers 172.16.20.10
+domain-search skills39.wsr
+
+auto ens256
+iface ens256 inet static
+address 172.16.50.1
+netmask 255.255.255.252
+#gateway 10.10.10.10
+nameservers 172.16.20.10
+domain-search skills39.wsr
+
+auto ens224
+iface ens224 inet static
+address 172.16.20.1
+netmask 255.255.255.0
+#gateway 10.10.10.10
+nameservers 172.16.20.10
+domain-search skills39.wsr
+
+auto ens161
+iface ens161 inet static
+address 172.16.55.1
+netmask 255.255.255.0
+#gateway 10.10.10.10
+nameservers 172.16.20.10
+domain-search skills39.wsr" > /etc/network/interfaces
+
