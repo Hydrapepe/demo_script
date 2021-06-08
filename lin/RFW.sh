@@ -32,6 +32,7 @@ sysctl -w net.ipv4.ip_forward=1 >> /etc/sysctl.conf
 sed '/hosts/d' -i /etc/nsswitch.conf
 echo -e 'hosts:\tdns files myhostname' >> /etc/nsswitch.conf
 #
+systemctl disable --now firewalld
 sed '/SELINUX/d' -i /etc/selinux/config
 echo -e 'SELINUX=disabled' >> /etc/selinux/config
 #
