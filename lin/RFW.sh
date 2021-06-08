@@ -28,4 +28,53 @@ echo "192.168.10.2    r-rtr   r-rtr.skill39.wsr" >> /etc/hosts
 echo "192.168.100.100 r-cli   r-cli.skill39.wsr" >> /etc/hosts
 echo "10.10.10.10     isp" >> /etc/hosts
 sysctl -w net.ipv4.ip_forward=1 >> /etc/sysctl.conf
-
+echo -e "
+TYPE=ETHERNET
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=nope
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=no
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=ens192
+DEVICE=ens192
+ONBOOT=yes
+IPADDR=20.20.20.100
+PREFIX=24
+GATEWAY=20.20.20.10
+DNS1=192.168.20.10
+DOMAIN=skill39.wsr" > /etc/sysconfig/network-scripts/ifcfg-ens192
+echo -e "
+TYPE=ETHERNET
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=nope
+IPADDR=192.168.10.1
+PREFIX=30
+DNS1=192.168.20.10
+DOMAIN=skill39.wsr
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=no
+NAME=ens224
+DEVICE=ens224
+ONBOOT=yes" > /etc/sysconfig/network-scripts/ifcfg-Wired_connection_1
+echo -e "
+TYPE=ETHERNET
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=nope
+IPADDR=192.168.20.1
+PREFIX=24
+DNS1=192.168.20.10
+DOMAIN=skill39.wsr
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=no
+NAME=ens256
+DEVICE=ens256
+ONBOOT=yes" > /etc/sysconfig/network-scripts/ifcfg-Wired_connection_2
