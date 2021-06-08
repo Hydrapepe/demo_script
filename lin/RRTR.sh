@@ -28,7 +28,10 @@ echo "192.168.10.2    r-rtr   r-rtr.skill39.wsr" >> /etc/hosts
 echo "192.168.100.100 r-cli   r-cli.skill39.wsr" >> /etc/hosts
 echo "10.10.10.10     isp" >> /etc/hosts
 sysctl -w net.ipv4.ip_forward=1 >> /etc/sysctl.conf
-
+#
+sed '/hosts/d' -i /etc/nsswitch.conf
+echo -e 'hosts:\tdns files myhostname' >> /etc/nsswitch.conf
+#
 echo -e "
 TYPE=ETHERNET
 PROXY_METHOD=none
