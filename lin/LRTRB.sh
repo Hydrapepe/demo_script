@@ -23,11 +23,15 @@ auto ens192
 iface ens192 inet static
 address 172.16.55.2
 gateway 172.16.55.1
+nameservers 172.16.20.10
+domain-search skills39.wsr
 netmask 255.255.255.252
 
 auto ens224
 iface ens224 inet static
 address 172.16.200.1
+nameservers 172.16.20.10
+domain-search skills39.wsr
 netmask 255.255.255.0
 " > /etc/network/interfaces
 
