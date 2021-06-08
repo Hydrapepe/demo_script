@@ -17,7 +17,7 @@ sed '/hosts/d' -i /etc/nsswitch.conf
 echo -e 'hosts:\tdns files' >> /etc/nsswitch.conf
 sysctl -w net.ipv4.ip_forward=1 >> /etc/sysctl.conf
 ip link add dev lo1 type dummy
-ip address add 1.1.1.1/32 dev lo1
+ip address add 2.2.2.2/32 dev lo1
 echo -e "auto lo
 iface lo inet loopback
 
