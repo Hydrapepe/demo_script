@@ -28,4 +28,23 @@ echo "192.168.10.2    r-rtr   r-rtr.skill39.wsr" >> /etc/hosts
 echo "192.168.100.100 r-cli   r-cli.skill39.wsr" >> /etc/hosts
 echo "10.10.10.10     isp" >> /etc/hosts
 
-
+echo -e "
+TYPE=ETHERNET
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=nope
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=no
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=ens192
+DEVICE=ens192
+ONBOOT=yes
+IPADDR=192.168.20.10
+GATEWAY=192.168.20.1
+PREFIX=24
+DNS1=192.168.20.10
+DOMAIN=skill39.wsr" > /etc/sysconfig/network-scripts/ifcfg-ens192
