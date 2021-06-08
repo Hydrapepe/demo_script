@@ -15,3 +15,12 @@ echo "192.168.100.100 r-cli   r-cli.skill39.wsr" >> /etc/hosts
 echo "10.10.10.10     isp" >> /etc/hosts
 sed '/hosts/d' -i /etc/nsswitch.conf
 echo -e 'hosts:\tdns files' >> /etc/nsswitch.conf
+echo -e "auto lo
+iface lo inet loopback
+
+auto ens192
+iface ens192 inet static
+address 172.16.20.10
+netmask 255.255.255.0
+nameservers 172.16.20.10
+domain-search skills39.wsr" > /etc/network/interfaces
