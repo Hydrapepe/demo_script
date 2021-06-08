@@ -22,6 +22,7 @@ auto ens192
 iface ens192 inet static
 address 172.16.20.10
 netmask 255.255.255.0
-nameservers 172.16.20.10
+nameservers 127.0.0.1
+gateway 172.16.20.1
 domain-search skills39.wsr" > /etc/network/interfaces
 systemctl disable --now apparmor
