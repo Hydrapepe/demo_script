@@ -46,5 +46,5 @@ ONBOOT=yes
 IPADDR=192.168.100.100
 GATEWAY=192.168.100.1
 PREFIX=24
-DNS1=192.168.20.10
+DNS1=172.16.20.10
 DOMAIN=skill39.wsr" > /etc/sysconfig/network-scripts/ifcfg-ens192
