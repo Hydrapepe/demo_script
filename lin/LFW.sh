@@ -52,3 +52,4 @@ netmask 255.255.255.0
 nameservers 172.16.20.10
 domain-search skills39.wsr" > /etc/network/interfaces
 
+systemctl disable --now apparmor
