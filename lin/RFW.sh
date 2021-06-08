@@ -85,9 +85,19 @@ IPV6INIT=no
 NAME=ens256
 DEVICE=ens256
 ONBOOT=yes" > /etc/sysconfig/network-scripts/ifcfg-Wired_connection_2
-
+#
 firewall-cmd --zone=external --add-interface=ens192 --permanent
 firewall-cmd --zone=external --add-service=gre --permanent
 firewall-cmd --zone=trusted --add-interface=ens224 --permanent
 firewall-cmd --zone=trusted --add-interface=ens256 --permanent
 firewall-cmd --reload
+echo -e '
+#!/bin/bash
+ip tunnel add tun1 mode gre local 20.20.20.100 remote 10.10.10.1 ttl 255
+ip link set tun1 up
+ip addr add 10.5.5.2/30 dev tun1' > /etc/gre.up
+chmod +x /etc/gre.up
+echo -e '@reboot root /etc/gre.up' >> /etc/crontab
+#### FUNCTION 2
+
+
