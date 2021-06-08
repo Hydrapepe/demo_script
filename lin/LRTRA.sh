@@ -16,3 +16,10 @@ echo "172.16.20.10    l-srv   l-srv.skill39.wsr
 sed '/hosts/d' -i /etc/nsswitch.conf
 echo -e 'hosts:\tdns files' >> /etc/nsswitch.conf
 sysctl -w net.ipv4.ip_forward=1 >> /etc/sysctl.conf
+echo -e "auto lo
+iface lo inet loopback
+
+auto ens192
+iface ens192 inet static
+address 172.16.50.2
+netmask 255.255.255.252" > /etc/network/interfaces
