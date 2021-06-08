@@ -52,6 +52,12 @@ netmask 255.255.255.0
 #gateway 10.10.10.10
 nameservers 172.16.20.10
 domain-search skills39.wsr" > /etc/network/interfaces
-
+#
 systemctl disable --now apparmor
 iptables -t nat -A POSTROUTING -o ens160 -j MASQUERADE
+#
+echo '
+#!/bin/bash
+ip tunnel add tun1 mode gre local 10.10.10.1 remote 20.20.20.100 ttl 255
+ip link set tun1 up
+ip addr 10.5.5.1/30 dev tun1' > /etc/gre.up
