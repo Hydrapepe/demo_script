@@ -28,3 +28,4 @@ auto ens224
 iface ens224 inet static
 address 172.16.100.1
 netmask 255.255.255.0" > /etc/network/interfaces
+systemctl disable --now apparmor
