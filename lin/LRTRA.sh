@@ -22,4 +22,9 @@ iface lo inet loopback
 auto ens192
 iface ens192 inet static
 address 172.16.50.2
-netmask 255.255.255.252" > /etc/network/interfaces
+netmask 255.255.255.252
+
+auto ens224
+iface ens224 inet static
+address 172.16.100.1
+netmask 255.255.255.0" > /etc/network/interfaces
