@@ -21,4 +21,4 @@ echo -e "auto lo
 iface lo inet loopback
 auto ens192
 iface ens192 inet dhcp" > /etc/network/interfaces
-systemctl disable --now apparmor
+
