@@ -22,6 +22,7 @@ iface lo inet loopback
 auto ens192
 iface ens192 inet static
 address 172.16.50.2
+gateway 172.16.50.1
 netmask 255.255.255.252
 
 auto ens224
