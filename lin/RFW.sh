@@ -85,3 +85,9 @@ IPV6INIT=no
 NAME=ens256
 DEVICE=ens256
 ONBOOT=yes" > /etc/sysconfig/network-scripts/ifcfg-Wired_connection_2
+
+firewall-cmd --zone=external --add-interface=ens192 --permanent
+firewall-cmd --zone=external --add-service=gre --permanent
+firewall-cmd --zone=trusted --add-interface=ens224 --permanent
+firewall-cmd --zone=trusted --add-interface=ens256 --permanent
+firewall-cmd --reload
