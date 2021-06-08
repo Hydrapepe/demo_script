@@ -16,6 +16,8 @@ echo "172.16.20.10    l-srv   l-srv.skill39.wsr
 sed '/hosts/d' -i /etc/nsswitch.conf
 echo -e 'hosts:\tdns files' >> /etc/nsswitch.conf
 sysctl -w net.ipv4.ip_forward=1 >> /etc/sysctl.conf
+ip link add dev lo1 type dummy
+ip address add 1.1.1.1/32 dev lo1
 echo -e "auto lo
 iface lo inet loopback
 
