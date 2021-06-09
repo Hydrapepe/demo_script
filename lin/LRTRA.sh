@@ -63,10 +63,12 @@ subnet 172.16.200.0 netmask 255.255.255.0 {
    option routers 172.16.200.1;
 }
 
-host clib {
-  hardware ethernet 00:0c:29:a3:ad:bf;
-  fixed-address 172.16.200.61;
-}' >> /etc/dhcp/dhcpd.conf
+#host clib {
+#  hardware ethernet 00:0c:29:a3:ad:bf;
+#  fixed-address 172.16.200.61;
+#}' >> /etc/dhcp/dhcpd.conf
+echo -e '\033[0;31m !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\033[0m'
+echo -e '\033[0;31m !!!!!!!!!ZAYDI V /etc/dhcp/dhcpd.conf IS POFIKSI L-CLI-B MAC ADDRESS V SAMOM NIZU!!!!!!!!  \033[0m'
+echo -e '\033[0;31m !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\033[0m'
 systemctl restart isc-dhcp-server
 systemctl enable isc-dhcp-server
-reboot
