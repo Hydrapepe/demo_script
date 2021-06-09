@@ -35,10 +35,12 @@ domain-search skills39.wsr
 netmask 255.255.255.0" > /etc/network/interfaces
 systemctl disable --now apparmor
 
-echo '
+echo -e '
 #!/bin/bash
 ip link add dev lo1 type dummy
 ip address add 1.1.1.1/32 dev lo1
 ip link set lo1 up' > /etc/loop.up
 chmod +x /etc/loop.up
 echo -e 'post-up /etc/loop.up' >> /etc/network/interfaces
+
+
