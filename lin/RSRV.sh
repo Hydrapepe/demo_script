@@ -28,6 +28,8 @@ echo "192.168.10.2    r-rtr   r-rtr.skill39.wsr" >> /etc/hosts
 echo "192.168.100.100 r-cli   r-cli.skill39.wsr" >> /etc/hosts
 echo "10.10.10.10     isp" >> /etc/hosts
 #
+sed '/PermitRootLogin/d' -i /etc/ssh/sshd_config
+echo -e 'PermitRootLogin yes' >> /etc/ssh/sshd_config
 sed '/hosts/d' -i /etc/nsswitch.conf
 echo -e 'hosts:\tdns files myhostname' >> /etc/nsswitch.conf
 #
