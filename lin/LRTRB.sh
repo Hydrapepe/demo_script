@@ -1,7 +1,7 @@
 #!/bin/bash
 apt-cdrom add
 hostnamectl set-hostname L-RTR-B
-apt install -y tcpdump net-tools curl vim lynx isc-dhcp-common dnsutils nfs-common cifs-utils sshpass openssh-server bash-completion
+apt install -y tcpdump net-tools curl vim lynx isc-dhcp-common dnsutils nfs-common cifs-utils sshpass openssh-server bash-completion isc-dhcp-relay
 echo -e "\n172.16.20.10    l-srv   l-srv.skill39.wsr" >> /etc/hosts
 echo "10.10.10.1      l-fw    l-fw.skill39.wsr" >> /etc/hosts
 echo "172.16.50.2     l-rtr-a l-rtr-a.skill39.wsr" >> /etc/hosts
@@ -42,3 +42,6 @@ ip address add 2.2.2.2/32 dev lo1
 ip link set lo1 up' > /etc/loop.up
 chmod +x /etc/loop.up
 echo -e 'post-up /etc/loop.up' >> /etc/network/interfaces
+echo -e '\033[0;31m !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\033[0m'
+echo -e '\033[0;31m !!!!!!!!!USTANOVITE isc-dhcp-relay so vtorogo diska, ip 172.16.50.2, interfaces ens192 ens224!!!!!!!!  \033[0m'
+echo -e '\033[0;31m !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\033[0m'
