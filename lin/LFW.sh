@@ -17,7 +17,8 @@ echo "10.10.10.10     isp" >> /etc/hosts
 sed '/hosts/d' -i /etc/nsswitch.conf
 echo -e 'hosts:\tdns files' >> /etc/nsswitch.conf
 sysctl -w net.ipv4.ip_forward=1 >> /etc/sysctl.conf
-
+sed '/PermitRootLogin/d' -i /etc/ssh/sshd_config
+echo -e 'PermitRootLogin yes' >> /etc/ssh/sshd_config
 echo -e "auto lo
 iface lo inet loopback
 
