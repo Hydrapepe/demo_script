@@ -13,6 +13,8 @@ echo "172.16.20.10    l-srv   l-srv.skill39.wsr
 192.168.10.2    r-rtr   r-rtr.skill39.wsr
 192.168.100.100 r-cli   r-cli.skill39.wsr
 10.10.10.10     isp" > /etc/hosts
+sed '/PermitRootLogin/d' -i /etc/ssh/sshd_config
+echo -e 'PermitRootLogin yes' >> /etc/ssh/sshd_config
 sed '/hosts/d' -i /etc/nsswitch.conf
 echo -e 'hosts:\tdns files' >> /etc/nsswitch.conf
 sysctl -w net.ipv4.ip_forward=1 >> /etc/sysctl.conf
