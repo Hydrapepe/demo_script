@@ -26,3 +26,42 @@ nameservers 127.0.0.1
 gateway 172.16.20.1
 domain-search skills39.wsr" > /etc/network/interfaces
 systemctl disable --now apparmor
+##### BIND TEST
+<< --MULTILINE-COMMENT--
+echo -e '
+options {
+  directory "/var/cache/bind";
+  forwarders {
+    10.10.10.10;
+  };
+  dnssec-validation no;
+  listen-on-v6 { any; };
+};' > /etc/bind/named.conf.options
+mkdir /opt/dns
+cp /etc/bind/db.local /opt/dns/skill39.db
+cp /etc/bind/db.127 /opt/dns/db.172
+cp /etc/bind/db.127 /opt/dns/db.192
+chown -R bind:bind /opt/dns
+echo -e '
+zone "." {
+  type hint;
+  file "/usr/share/dns/root.hints"
+};
+zone "skill39.wsr" {
+   type master;
+   allow-transfer { any; };
+   file "/opt/dns/skill39.db";
+};
+
+zone "16.172.in-addr.arpa" {
+   type master;
+   allow-transfer { any; };
+   file "/opt/dns/db.172";
+};
+
+zone "20.168.192.in-addr.arpa" {
+   type master;
+   allow-transfer { any; };
+   file "/opt/dns/db.192";
+};' > /etc/bind/named.conf.default-zones
+--MULTILINE-COMMENT--
