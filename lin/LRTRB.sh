@@ -35,7 +35,7 @@ domain-search skills39.wsr
 netmask 255.255.255.0" > /etc/network/interfaces
 
 systemctl disable --now apparmor
-echo '
+echo -e '
 #!/bin/bash
 ip link add dev lo1 type dummy
 ip address add 2.2.2.2/32 dev lo1
