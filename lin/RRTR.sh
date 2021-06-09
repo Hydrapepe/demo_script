@@ -36,6 +36,8 @@ systemctl disable --now firewalld
 sed '/SELINUX/d' -i /etc/selinux/config
 echo -e 'SELINUX=disabled' >> /etc/selinux/config
 #
+sed '/PermitRootLogin/d' -i /etc/ssh/sshd_config
+echo -e 'PermitRootLogin yes' >> /etc/ssh/sshd_config
 echo -e "
 TYPE=ETHERNET
 PROXY_METHOD=none
