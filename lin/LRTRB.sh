@@ -32,8 +32,7 @@ iface ens224 inet static
 address 172.16.200.1
 nameservers 172.16.20.10
 domain-search skills39.wsr
-netmask 255.255.255.0
-" > /etc/network/interfaces
+netmask 255.255.255.0" > /etc/network/interfaces
 
 systemctl disable --now apparmor
 echo '
