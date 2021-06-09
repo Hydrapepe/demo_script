@@ -50,6 +50,9 @@ sed '/option domain-name/d' -i /etc/dhcp/dhcpd.conf
 echo -e 'option domain-name "skill39.wsr";' >> /etc/dhcp/dhcpd.conf
 sed '/option domain-name-servers/d' -i /etc/dhcp/dhcpd.conf
 echo -e 'option domain-name-servers "172.16.20.10";' >> /etc/dhcp/dhcpd.conf
+sed '/ddns-update-style/d' -i /etc/dhcp/dhcpd.conf
+echo -e 'ddns-update-style interim;' >> /etc/dhcp/dhcpd.conf
+echo -e 'update-static-leases on;' >> /etc/dhcp/dhcpd.conf
 echo -e '
 subnet 172.16.50.0 netmask 255.255.255.252 {}
 
@@ -61,6 +64,13 @@ subnet 172.16.100.0 netmask 255.255.255.0 {
 subnet 172.16.200.0 netmask 255.255.255.0 {
    range 172.16.200.65 172.16.200.75;
    option routers 172.16.200.1;
+}
+
+zone skill39.wsr. {
+  primary 172.16.20.10;
+}
+zone 16.172.in-addr.arpa. {
+  primary 172.16.20.10;
 }
 
 #host clib {
