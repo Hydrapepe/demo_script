@@ -16,8 +16,6 @@ echo "10.10.10.10     isp" >> /etc/hosts
 sed '/hosts/d' -i /etc/nsswitch.conf
 echo -e 'hosts:\tdns files' >> /etc/nsswitch.conf
 sysctl -w net.ipv4.ip_forward=1 >> /etc/sysctl.conf
-ip link add dev lo1 type dummy
-ip address add 2.2.2.2/32 dev lo1
 echo -e "auto lo
 iface lo inet loopback
 
@@ -38,3 +36,5 @@ netmask 255.255.255.0
 " > /etc/network/interfaces
 
 systemctl disable --now apparmor
+ip link add dev lo1 type dummy
+ip address add 2.2.2.2/32 dev lo1
