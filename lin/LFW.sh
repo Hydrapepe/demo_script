@@ -48,7 +48,7 @@ domain-search skills39.wsr
 auto ens161
 iface ens161 inet static
 address 172.16.55.1
-netmask 255.255.255.0
+netmask 255.255.255.252
 #gateway 10.10.10.10
 nameservers 172.16.20.10
 domain-search skills39.wsr" > /etc/network/interfaces
