@@ -54,7 +54,7 @@ nameservers 172.16.20.10
 domain-search skills39.wsr" > /etc/network/interfaces
 #
 systemctl disable --now apparmor
-iptables -t nat -A POSTROUTING -o ens160 -j MASQUERADE
+iptables -t nat -A POSTROUTING -o ens192 -j MASQUERADE
 #
 echo '
 #!/bin/bash
