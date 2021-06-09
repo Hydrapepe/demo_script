@@ -31,6 +31,8 @@ echo "10.10.10.10     isp" >> /etc/hosts
 sed '/hosts/d' -i /etc/nsswitch.conf
 echo -e 'hosts:\tdns files myhostname' >> /etc/nsswitch.conf
 #
+sed '/PermitRootLogin/d' -i /etc/ssh/sshd_config
+echo -e 'PermitRootLogin yes' >> /etc/ssh/sshd_config
 systemctl disable --now firewalld
 sed '/SELINUX/d' -i /etc/selinux/config
 echo -e 'SELINUX=disabled' >> /etc/selinux/config
