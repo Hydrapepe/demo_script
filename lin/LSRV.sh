@@ -59,6 +59,8 @@ zone "16.172.in-addr.arpa" {
    file "/opt/dns/db.172";
 };
 
+allow-update { 172.16.50.2; };
+
 zone "20.168.192.in-addr.arpa" {
    type master;
    allow-transfer { any; };
