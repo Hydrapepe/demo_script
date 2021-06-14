@@ -1,0 +1,44 @@
+hostname SW3
+service password-encryption
+enable secret wsr
+enable password wsr
+username wsruser privilege 15 secret network
+aaa new-model
+aaa authentication login default local
+aaa authorization console
+aaa authorization exec default local
+vtp domain worldskills.ru
+vtp mode client
+ip domain-name worldskills.ru
+crypto key generate rsa modulus 1024
+spanning-tree mode pvst
+ip ssh version 2
+interface Vlan100
+ ip address 10.100.100.30 255.255.255.0
+ no sh
+exit
+ip default-gateway 10.100.100.1
+line con 0
+line vty 5 15
+ transport input all
+exit
+interface FastEthernet0/2
+ switchport trunk allowed vlan 100,200,300,500,600
+ switchport nonegotiate
+exit
+interface range FastEthernet0/3-4
+ switchport trunk allowed vlan 100,200,300,500,600
+ channel-group 2 mode auto
+exit
+interface Port-channel2
+ switchport trunk allowed vlan 100,200,300,500,600
+ switchport mode dynamic auto
+exit
+interface FastEthernet0/10
+ switchport mode access
+ switchport access vlan 200
+ switchport nonegotiate
+exit
+interface range FastEthernet0/2, Port-channel2
+ switchport trunk native vlan 500
+exit

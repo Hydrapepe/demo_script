@@ -1,0 +1,136 @@
+hostname FW1
+domain-name worldskills.ru
+password encryption aes
+enable password wsr 
+username wsruser password network privilege 15
+crypto key generate rsa modulus 1024
+aaa authentication telnet console LOCAL
+aaa authentication enable console LOCAL
+aaa authentication ssh console LOCAL
+aaa authorization exec LOCAL
+aaa authentication login-history
+mtu ISP1UP 1500
+mtu ISP2UPINT 1500
+mtu HQ1 1500
+mtu BR1 1500
+mtu inside_4 1500
+mtu inside_5 1500
+mtu inside_6 1500
+mtu inside_7 1500
+interface BVI10
+ nameif VPN
+ security-level 100
+ ip address 172.16.3.2 255.255.255.0
+ ipv6 address 2001:4::2/64
+ ipv6 enable
+exit
+interface BVI20
+ nameif TESTHQ
+ security-level 100
+ ip address 30.78.87.2 255.255.255.248
+ ipv6 address 2001:3::1/64
+ ipv6 enable
+exit
+interface BVI99
+ nameif ISP2UP
+ security-level 100
+ ip address 22.84.4.6 255.255.255.252
+exit
+interface GigabitEthernet1/2.901
+ vlan 901
+ bridge-group 99
+ nameif ISP2UPINTER
+ security-level 100
+ no sh
+exit
+mtu ISP2UPINTER 1500
+interface GigabitEthernet1/1
+ nameif ISP1UP
+ security-level 100
+ ip address 100.45.10.2 255.255.255.252
+ no sh
+exit
+interface GigabitEthernet1/4.10
+ vlan 10
+ bridge-group 10
+ nameif VNLINT
+ security-level 100
+ no sh
+exit
+mtu VNLINT 1500
+interface GigabitEthernet1/1.901
+ vlan 99
+ no nameif
+ security-level 100
+ no ip address
+ no sh
+exit
+interface GigabitEthernet1/2
+ nameif ISP2UPINT
+ security-level 100
+ no sh
+exit
+mtu HQDOWN 1500
+interface GigabitEthernet1/3
+ no nameif
+ bridge-group 1
+ nameif HQ1
+ security-level 100
+ no sh
+exit
+interface GigabitEthernet1/3.11
+ vlan 11
+ bridge-group 10
+ nameif HQVPNDOWN
+ security-level 100
+ no sh
+exit
+mtu HQVPNDOWN 1500
+interface GigabitEthernet1/3.20
+ vlan 20
+ bridge-group 20
+ nameif HQDOWN
+ security-level 100
+ no sh
+exit
+interface GigabitEthernet1/4
+ bridge-group 1
+ no nameif
+ nameif BR1
+ security-level 100
+ no sh
+exit
+same-security-traffic permit inter-interface
+same-security-traffic permit intra-interface
+logging enable
+logging trap informational
+logging asdm informational
+logging host HQVPNDOWN 172.16.20.20 format emblem
+router ospf 1
+ network 172.16.3.0 255.255.255.0 area 0
+exit
+router bgp 65000
+ bgp log-neighbor-changes
+ address-family ipv4 unicast
+  neighbor 100.45.10.1 remote-as 65001
+  neighbor 100.45.10.1 activate
+  neighbor 30.78.87.1 remote-as 65000
+  neighbor 30.78.87.1 activate
+  neighbor 22.84.4.5 remote-as 65002
+  neighbor 22.84.4.5 activate
+  network 100.45.10.0 mask 255.255.255.252
+  network 30.78.21.0 mask 255.255.255.0
+  network 30.78.87.0 mask 255.255.255.248
+  network 1.1.1.1 mask 255.255.255.255
+  network 22.84.4.4 mask 255.255.255.252
+exit
+telnet 192.168.254.0 255.255.255.0 HQ1
+telnet 192.168.254.0 255.255.255.0 BR1
+telnet 192.168.254.0 255.255.255.0 inside_4
+telnet 30.78.21.0 255.255.255.0 HQDOWN
+telnet 30.78.87.0 255.255.255.248 HQDOWN
+telnet 10.100.100.0 255.255.255.0 HQDOWN
+ssh 192.168.254.0 255.255.255.0 HQ1
+ssh 30.78.87.0 255.255.255.248 HQDOWN
+ssh 10.100.100.0 255.255.255.0 HQDOWN
+ssh 30.78.21.0 255.255.255.0 HQDOWN

@@ -1,0 +1,99 @@
+hostname BR1
+service password-encryption
+enable secret wsr
+enable password wsr
+username wsruser privilege 15 secret network
+username pc2user password pc2pass
+username user1 privilege 5 secret cisco
+aaa new-model
+aaa authentication login default local
+aaa authorization console
+aaa authorization exec default local
+ip domain name worldskills.ru
+crypto key generate rsa modulus 1024
+ip ssh version 2
+line con 0
+line vty 0 15
+ transport input all
+exit
+interface loopback 0
+ ip address 3.3.3.3 255.255.255.255
+ ipv6 address 2001:A:B:3::1/64
+ ipv6 enable
+ no sh
+exit
+interface multilink 1
+ ip address negotiated
+ ppp multilink
+ ppp multilink group 1
+ no sh
+exit
+interface FastEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 172.16.3.3 255.255.255.0
+ ipv6 address 2001:4::3/64
+ ipv6 enable
+ no sh
+exit
+interface FastEthernet0/1
+ ip address 192.168.2.1 255.255.255.0
+ duplex auto
+ speed auto
+ ipv6 address 2001:A:B:ACAD::1/64
+ ipv6 enable
+ pppoe enable group global
+ no sh 
+exit
+interface Serial0/0/0:0
+ no ip address
+ encapsulation ppp
+ ppp multilink
+ ppp multilink group 1
+ no sh
+exit
+interface Serial0/0/1:0
+ no ip address
+ encapsulation ppp
+ ppp multilink
+ ppp multilink group 1
+ no sh
+exit
+interface Serial0/1/0:0
+ ip address 22.84.4.2 255.255.255.252
+ encapsulation hdlc
+ no sh
+exit
+ip local pool PC2 192.168.2.10
+interface Virtual-Template1
+ mtu 1492
+ encapsulation ppp
+ ip unnumbered fa0/1
+ peer default ip address pool PC2
+ ppp authentication chap ms-chap ms-chap-v2
+ no sh
+exit
+bba-group pppoe global
+virtual-template 1
+exit
+int tun 1
+ip addr 172.16.1.2 255.255.255.0
+tunnel source 1.1.1.1
+tunnel destination 3.3.3.3
+no sh
+exit
+router ospf 1
+ passive-interface default
+ no passive-interface FastEthernet0/0.10
+ no passive-interface Tunnel1
+ network 172.16.1.0 0.0.0.255 area 0
+ network 172.16.3.0 0.0.0.255 area 0
+ network 192.168.2.0 0.0.0.255 area 0
+exit
+router bgp 65010
+ bgp log-neighbor-changes
+ network 3.3.3.3 mask 255.255.255.255
+ network 22.84.4.0 mask 255.255.255.252
+ network 100.45.5.0 mask 255.255.255.252
+ neighbor 22.84.4.1 remote-as 65002
+ neighbor 100.45.5.1 remote-as 65001
+exit

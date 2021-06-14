@@ -1,0 +1,60 @@
+hostname SW1
+service password-encryption
+enable secret wsr
+enable password wsr
+username wsruser privilege 15 secret network
+aaa new-model
+aaa authentication login default local
+aaa authorization console
+aaa authorization exec default local
+ip domain-name worldskills.ru
+ip default-gateway 10.100.100.1
+vlan 100
+name MGT
+vlan 200
+name DATA
+vlan 300
+name OFFICE
+vlan 500
+name NATIVE
+vlan 600
+name SHUTDOWN
+exit
+vtp domain worldskills.ru
+vtp mode server
+crypto key generate rsa modulus 1024
+spanning-tree mode pvst
+spanning-tree extend system-id
+spanning-tree vlan 100,200,300 root primary
+ip ssh version 2
+interface Vlan100
+ ip address 10.100.100.10 255.255.255.0
+ no sh
+exit
+interface range FastEthernet0/3-4
+ switchport trunk allowed vlan 100,200,300,500,600
+ channel-group 2 mode desirable
+ no sh
+exit
+interface FastEthernet0/1
+ switchport trunk allowed vlan 100,200,300,500,600
+ switchport nonegotiate
+ spanning-tree portfast trunk
+ no sh
+exit
+line con 0
+line vty 5 15
+ transport input all
+interface range FastEthernet0/5-6
+ switchport trunk allowed vlan 100,200,300,500,600
+ channel-group 1 mode active
+ no sh
+exit
+interface range Port-channel 1-2
+ switchport trunk allowed vlan 100,200,300,500,600
+ switchport mode dynamic desirable
+ no sh
+exit
+interface range Port-channel 1-2
+ switchport trunk native vlan 500
+exit

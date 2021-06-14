@@ -1,0 +1,88 @@
+hostname HQ1
+service password-encryption
+enable secret wsr
+enable password wsr
+username wsruser privilege 15 secret network
+aaa new-model
+aaa authentication login default local
+aaa authorization console
+aaa authorization exec default local
+ip dhcp pool test
+ host 30.78.21.10 255.255.255.0
+ client-identifier 0130.9c23.019d.69
+ default-router 30.78.21.1
+ option 150 ip 172.16.20.20
+exit
+ip domain name worldskills.ru
+crypto key generate rsa modulus 1024
+ip ssh version 2
+interface Loopback0
+ ip address 1.1.1.1 255.255.255.255
+ ipv6 address 2001:A:B:1::1/64
+ no sh
+exit
+interface Tunnel1
+ ip address 172.16.1.1 255.255.255.0
+ ipv6 address 2001:1::1/64
+ ipv6 enable
+ tunnel source 3.3.3.3
+ no sh
+exit
+interface FastEthernet0/0
+ ip address 192.168.254.1 255.255.255.0
+ no sh
+exit
+interface FastEthernet0/0.11
+ encapsulation dot1Q 11
+ ip address 172.16.3.1 255.255.255.0
+ ipv6 address 2001:4::1/64
+ ipv6 enable
+exit
+interface FastEthernet0/0.20
+ encapsulation dot1Q 20
+ ip address 30.78.87.1 255.255.255.248
+ ipv6 address 2001:3::1/64
+ ipv6 enable
+ no sh
+exit
+interface FastEthernet0/1.100
+ encapsulation dot1Q 100
+ ip address 10.100.100.1 255.255.255.0
+ no sh
+exit
+interface FastEthernet0/1.200
+ encapsulation dot1Q 200
+ ip address 172.16.20.1 255.255.255.0
+ no sh
+exit
+interface FastEthernet0/1.300
+ encapsulation dot1Q 300
+ ip address 30.78.21.1 255.255.255.0
+ ipv6 address 2001:A:B:DEAD::1/64
+ ipv6 enable
+ no sh
+exit
+router ospf 1
+ passive-interface default
+ no passive-interface FastEthernet0/0.11
+ no passive-interface Tunnel1
+ network 10.100.100.0 0.0.0.255 area 51
+ network 172.16.1.0 0.0.0.255 area 0
+ network 172.16.3.0 0.0.0.255 area 0
+ network 172.16.20.0 0.0.0.255 area 51
+exit
+router bgp 65000
+ bgp log-neighbor-changes
+ neighbor 30.78.87.2 remote-as 65000
+ address-family ipv4
+  network 1.1.1.1 mask 255.255.255.255
+  network 30.78.87.0 mask 255.255.255.248
+  neighbor 30.78.87.2 activate
+ exit-address-family
+exit
+logging esm config
+logging 172.16.20.20
+line con 0
+line vty 5 15
+ transport input all
+ transport output all
