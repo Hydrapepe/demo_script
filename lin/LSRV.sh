@@ -92,8 +92,9 @@ $WorkDirectory /var/spool/rsyslog
 
 $IncludeConfig /etc/rsyslog.d/*.conf
 
-auth.*\t/var/log/L-SRV/auth.log
+auth.*\t/opt/logs/L-SRV/auth.log
 if $hostname contains "L-FW" or $fromhost-ip contains "172.16.20.1" then {
-*.err\t/var/log/L-FW/error.log
+*.err\t/opt/logs/L-FW/error.log
 }
 ' > /etc/rsyslog.conf
+service rsyslog restart
