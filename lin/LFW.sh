@@ -19,6 +19,9 @@ echo -e 'hosts:\tdns files' >> /etc/nsswitch.conf
 sysctl -w net.ipv4.ip_forward=1 >> /etc/sysctl.conf
 sed '/PermitRootLogin/d' -i /etc/ssh/sshd_config
 echo -e 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+echo -e 'AllowUsers ssh_p root ssh_c' >> /etc/ssh/sshd_config
+adduser ssh_p
+adduser ssh_c
 echo -e "auto lo
 iface lo inet loopback
 
