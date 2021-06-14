@@ -69,3 +69,31 @@ zone "20.168.192.in-addr.arpa" {
    file "/opt/dns/db.192";
 };' > /etc/bind/named.conf.default-zones
 --MULTILINE-COMMENT--
+echo -e '
+module(load="imuxsock") # provides support for local system logging
+module(load="imklog")   # provides kernel logging support
+module(load="immark")  # provides --MARK-- message capability
+
+module(load="imudp")
+input(type="imudp" port="514")
+
+module(load="imtcp")
+input(type="imtcp" port="514")
+
+$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+
+$FileOwner root
+$FileGroup adm
+$FileCreateMode 0640
+$DirCreateMode 0755
+$Umask 0022
+
+$WorkDirectory /var/spool/rsyslog
+
+$IncludeConfig /etc/rsyslog.d/*.conf
+
+auth.*\t/var/log/L-SRV/auth.log
+if $hostname contains "L-FW" or $fromhost-ip contains "172.16.20.1" then {
+*.err\t/var/log/L-FW/error.log
+}
+' > /etc/rsyslog.conf
