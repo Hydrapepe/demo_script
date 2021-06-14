@@ -68,3 +68,5 @@ ip addr add 10.5.5.1/30 dev tun1' > /etc/gre.up
 chmod +x /etc/gre.up
 echo -e 'post-up /etc/gre.up' >> /etc/network/interfaces
 #### FUNCTION 2
+echo -e '*.*@172.16.20.10' >> /etc/rsyslog.conf
+service rsyslog restart
