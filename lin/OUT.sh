@@ -57,3 +57,5 @@ GATEWAY=20.20.20.10
 PREFIX=24
 DNS1=172.16.20.10
 DOMAIN=skill39.wsr" > /etc/sysconfig/network-scripts/ifcfg-ens192
+echo -e '!!!!!!!!!!!!!!! POSLE USTANOVKI SCRIPTA l-FW NE ZABUD zapustit ssh-keygen'
+echo -e '!!!!!!!!!!!!!!!  i eto      ssh-copy-id ssh_p@10.10.10.1'
