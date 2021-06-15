@@ -2,16 +2,16 @@
 apt-cdrom add
 hostnamectl set-hostname L-RTR-B
 apt install -y tcpdump net-tools curl vim lynx isc-dhcp-common dnsutils nfs-common cifs-utils sshpass openssh-server bash-completion iptables-persistent
-echo -e "\n172.16.20.10    l-srv   l-srv.skill39.wsr" >> /etc/hosts
-echo "10.10.10.1      l-fw    l-fw.skill39.wsr" >> /etc/hosts
-echo "172.16.50.2     l-rtr-a l-rtr-a.skill39.wsr" >> /etc/hosts
-echo "172.16.55.2     l-rtr-b l-rtr-b.skill39.wsr" >> /etc/hosts
-echo "172.16.200.61   l-cli-b l-cli-b.skill39.wsr" >> /etc/hosts
-echo "20.20.20.5      out-cli out-cli.skill39.wsr" >> /etc/hosts
-echo "20.20.20.100    r-fw    r-fw.skill39.wsr" >> /etc/hosts
-echo "192.168.20.10   r-srv   r-srv.skill39.wsr" >> /etc/hosts
-echo "192.168.10.2    r-rtr   r-rtr.skill39.wsr" >> /etc/hosts
-echo "192.168.100.100 r-cli   r-cli.skill39.wsr" >> /etc/hosts
+echo -e "\n172.16.20.10    l-srv   l-srv.itnsa39.wsr" >> /etc/hosts
+echo "10.10.10.1      l-fw    l-fw.itnsa39.wsr" >> /etc/hosts
+echo "172.16.50.2     l-rtr-a l-rtr-a.itnsa39.wsr" >> /etc/hosts
+echo "172.16.55.2     l-rtr-b l-rtr-b.itnsa39.wsr" >> /etc/hosts
+echo "172.16.200.61   l-cli-b l-cli-b.itnsa39.wsr" >> /etc/hosts
+echo "20.20.20.5      out-cli out-cli.itnsa39.wsr" >> /etc/hosts
+echo "20.20.20.100    r-fw    r-fw.itnsa39.wsr" >> /etc/hosts
+echo "192.168.20.10   r-srv   r-srv.itnsa39.wsr" >> /etc/hosts
+echo "192.168.10.2    r-rtr   r-rtr.itnsa39.wsr" >> /etc/hosts
+echo "192.168.100.100 r-cli   r-cli.itnsa39.wsr" >> /etc/hosts
 echo "10.10.10.10     isp" >> /etc/hosts
 sed '/hosts/d' -i /etc/nsswitch.conf
 echo -e 'hosts:\tdns files' >> /etc/nsswitch.conf
@@ -26,14 +26,14 @@ iface ens192 inet static
 address 172.16.55.2
 gateway 172.16.55.1
 nameservers 172.16.20.10
-domain-search skills39.wsr
+domain-search itnsa39.wsr
 netmask 255.255.255.252
 
 auto ens224
 iface ens224 inet static
 address 172.16.200.1
 nameservers 172.16.20.10
-domain-search skills39.wsr
+domain-search itnsa39.wsr
 netmask 255.255.255.0" > /etc/network/interfaces
 systemctl disable --now apparmor
 echo -e '

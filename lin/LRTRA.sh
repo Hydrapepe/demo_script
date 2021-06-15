@@ -2,16 +2,16 @@
 apt-cdrom add
 hostnamectl set-hostname L-RTR-A
 apt install -y tcpdump net-tools curl vim lynx isc-dhcp-common dnsutils nfs-common cifs-utils sshpass openssh-server bash-completion isc-dhcp-server iptables-persistent
-echo "172.16.20.10    l-srv   l-srv.skill39.wsr
-10.10.10.1      l-fw    l-fw.skill39.wsr
-172.16.50.2     l-rtr-a l-rtr-a.skill39.wsr
-172.16.55.2     l-rtr-b l-rtr-b.skill39.wsr
-172.16.200.61   l-cli-b l-cli-b.skill39.wsr
-20.20.20.5      out-cli out-cli.skill39.wsr
-20.20.20.100    r-fw    r-fw.skill39.wsr
-192.168.20.10   r-srv   r-srv.skill39.wsr
-192.168.10.2    r-rtr   r-rtr.skill39.wsr
-192.168.100.100 r-cli   r-cli.skill39.wsr
+echo "172.16.20.10    l-srv   l-srv.itnsa39.wsr
+10.10.10.1      l-fw    l-fw.itnsa39.wsr
+172.16.50.2     l-rtr-a l-rtr-a.itnsa39.wsr
+172.16.55.2     l-rtr-b l-rtr-b.itnsa39.wsr
+172.16.200.61   l-cli-b l-cli-b.itnsa39.wsr
+20.20.20.5      out-cli out-cli.itnsa39.wsr
+20.20.20.100    r-fw    r-fw.itnsa39.wsr
+192.168.20.10   r-srv   r-srv.itnsa39.wsr
+192.168.10.2    r-rtr   r-rtr.itnsa39.wsr
+192.168.100.100 r-cli   r-cli.itnsa39.wsr
 10.10.10.10     isp" > /etc/hosts
 sed '/PermitRootLogin/d' -i /etc/ssh/sshd_config
 echo -e 'PermitRootLogin yes' >> /etc/ssh/sshd_config
@@ -26,14 +26,14 @@ iface ens192 inet static
 address 172.16.50.2
 gateway 172.16.50.1
 nameservers 172.16.20.10
-domain-search skills39.wsr
+domain-search itnsa39.wsr
 netmask 255.255.255.252
 
 auto ens224
 iface ens224 inet static
 address 172.16.100.1
 nameservers 172.16.20.10
-domain-search skills39.wsr
+domain-search itnsa39.wsr
 netmask 255.255.255.0" > /etc/network/interfaces
 systemctl disable --now apparmor
 echo -e '
@@ -49,7 +49,7 @@ echo -e 'INTERFACESv4="ens192 ens224"' >> /etc/default/isc-dhcp-server
 sed '/authoritative/d' -i /etc/dhcp/dhcpd.conf
 echo -e 'authoritative;' >> /etc/dhcp/dhcpd.conf
 sed '/option domain-name/d' -i /etc/dhcp/dhcpd.conf
-echo -e 'option domain-name "skill39.wsr";' >> /etc/dhcp/dhcpd.conf
+echo -e 'option domain-name "itnsa39.wsr";' >> /etc/dhcp/dhcpd.conf
 sed '/option domain-name-servers/d' -i /etc/dhcp/dhcpd.conf
 echo -e 'option domain-name-servers "172.16.20.10";' >> /etc/dhcp/dhcpd.conf
 sed '/ddns-update-style/d' -i /etc/dhcp/dhcpd.conf
@@ -59,16 +59,16 @@ echo -e '
 subnet 172.16.50.0 netmask 255.255.255.252 {}
 
 subnet 172.16.100.0 netmask 255.255.255.0 {
-   range 172.16.100.65 172.16.100.75;
+   range 172.16.100.88 172.16.100.100;
    option routers 172.16.100.1;
 }
 
 subnet 172.16.200.0 netmask 255.255.255.0 {
-   range 172.16.200.65 172.16.200.75;
+   range 172.16.200.99 172.16.200.111;
    option routers 172.16.200.1;
 }
 
-zone skill39.wsr. {
+zone itnsa39.wsr. {
   primary 172.16.20.10;
 }
 zone 16.172.in-addr.arpa. {
