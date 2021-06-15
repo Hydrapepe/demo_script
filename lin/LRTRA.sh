@@ -84,3 +84,4 @@ echo -e '\033[0;31m !!!!!!!!!ZAYDI V /etc/dhcp/dhcpd.conf I POFIKSI L-CLI-B MAC 
 echo -e '\033[0;31m !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\033[0m'
 systemctl restart isc-dhcp-server
 systemctl enable isc-dhcp-server
+echo -e '*.*@172.16.20.10' >> /etc/rsyslog.conf

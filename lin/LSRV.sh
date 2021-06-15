@@ -194,6 +194,7 @@ echo -e '
 }' > /etc/apparmor.d/usr.sbin.named
 systemctl restart apparmor.service
 systemctl disable --now apparmor
+mkdir -p /opt/error
 echo -e '
 module(load="imuxsock") # provides support for local system logging
 module(load="imklog")   # provides kernel logging support
@@ -217,12 +218,17 @@ $WorkDirectory /var/spool/rsyslog
 
 $IncludeConfig /etc/rsyslog.d/*.conf
 
-auth.*\t/opt/logs/L-SRV/auth.log
+authpriv.*\t/opt/error/L-SRV/auth.log
 if $hostname contains "L-FW" or $fromhost-ip contains "172.16.20.1" then {
-*.err\t/opt/logs/L-FW/error.log
+*.*\t/opt/error/L-FW/super.log
+}
+
+if $hostname contains "L-RTR-A" or $fromhost-ip contains "172.16.50.2" then {
+*.err\t/opt/error/L-RTR-A/error.log
 }
 ' > /etc/rsyslog.conf
 service rsyslog restart
+logger -p authpriv.err test
 mkdir /opt/sync
 useradd rsyncuser
 echo rsyncuser:toor | chpasswd
