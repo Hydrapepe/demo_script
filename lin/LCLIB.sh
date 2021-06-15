@@ -22,13 +22,15 @@ iface lo inet loopback
 auto ens192
 iface ens192 inet dhcp" > /etc/network/interfaces
 systemctl disable --now apparmor
-echo parol666 > /etc/pass
+echo P@ssw0rd > /etc/pass
 chmod 400 /etc/pass
-mkdir /root/sync
+mkdir /root/backup
 echo -e '
 #!/bin/bash
-rsync -avz --password-file /etc/pass -O /root/sync sync@l-srv.itnsa39.wsr::data
+rsync -avz --password-file /etc/pass -O /root/backup sync@l-srv.itnsa39.wsr::data
 ' > /root/sync.sh
 chmod +x /root/sync.sh
+echo -e '*/20  * * * * root /root/sync.sh' >> /etc/crontab
+service cron restart
 echo -e '!!!!!!!!!!!! NE zabud proverit rsync 
 zapusti ./root/sync.sh kogda zapustish vse sripty'

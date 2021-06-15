@@ -224,14 +224,14 @@ if $hostname contains "L-FW" or $fromhost-ip contains "172.16.20.1" then {
 ' > /etc/rsyslog.conf
 service rsyslog restart
 mkdir /opt/sync
-useradd mrsync
-echo mrsync:toor | chpasswd
-chown mrsync /opt/sync
+useradd rsyncuser
+echo rsyncuser:toor | chpasswd
+chown rsyncuser /opt/sync
 sed '/RSYNC_ENABLE/d' -i /etc/default/rsync
 echo -e 'RSYNC_ENABLE=TRUE' >> /etc/default/rsync
 echo -e '
 [data]
-\tuid=mrsync
+\tuid=rsyncuser
 \tread only=false
 \tpath=/opt/sync
 \tauth users=sync
@@ -239,7 +239,7 @@ echo -e '
 \thosts allow=L-CLI-A.itnsa39.wsr, L-CLI-B.itnsa39.wsr
 \thosts deny=*
 ' > /etc/rsyncd.conf
-echo sync:parol666 > /etc/rsyncd.secrets
+echo sync:P@ssw0rd > /etc/rsyncd.secrets
 chmod 400 /etc/rsyncd.secrets
 systemctl enable --now rsync
 systemctl restart rsync
