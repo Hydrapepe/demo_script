@@ -46,3 +46,6 @@ ip link set tun1 up
 ip addr add 10.5.5.2/30 dev tun1' > /etc/gre.up
 chmod +x /etc/gre.up
 echo -e '@reboot root /etc/gre.up' >> /etc/crontab
+echo -e '!!!!!!!!!!!!!!! Postav ip 20.20.20.100 mask 24 na ens192, gateway 20.20.20.10, dns 172.16.20.10, domain itnsa39.wsr'
+echo -e '!!!!!!!!!!!!!!! Postav ip 192.168.10.1 mask 30 na ens224, gateway ne nado, dns 172.16.20.10, domain itnsa39.wsr'
+echo -e '!!!!!!!!!!!!!!! Postav ip 192.168.20.1 mask 24 na ens256, gateway ne nado, dns 172.16.20.10, domain itnsa39.wsr'

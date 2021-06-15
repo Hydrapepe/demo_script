@@ -34,5 +34,6 @@ echo -e 'PermitRootLogin yes' >> /etc/ssh/sshd_config
 systemctl disable --now firewalld
 sed '/SELINUX/d' -i /etc/selinux/config
 echo -e 'SELINUX=disabled' >> /etc/selinux/config
+echo -e '!!!!!!!!!!!!!!! Postav ip 20.20.20.5 mask 24 na ens192, gateway 20.20.20.10, dns 172.16.20.10, domain itnsa39.wsr'
 echo -e '!!!!!!!!!!!!!!! POSLE USTANOVKI SCRIPTA l-FW NE ZABUD zapustit ssh-keygen'
 echo -e '!!!!!!!!!!!!!!!  i eto      ssh-copy-id ssh_p@10.10.10.1'

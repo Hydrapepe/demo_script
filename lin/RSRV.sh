@@ -34,3 +34,4 @@ echo -e 'hosts:\tdns files myhostname' >> /etc/nsswitch.conf
 systemctl disable --now firewalld
 sed '/SELINUX/d' -i /etc/selinux/config
 echo -e 'SELINUX=disabled' >> /etc/selinux/config
+echo -e '!!!!!!!!!!!!!!! Postav ip 192.168.20.10 mask 24 na ens192, gateway 192.168.20.1, dns 172.16.20.10, domain itnsa39.wsr'

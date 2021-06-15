@@ -35,3 +35,5 @@ sed '/SELINUX/d' -i /etc/selinux/config
 echo -e 'SELINUX=disabled' >> /etc/selinux/config
 sed '/PermitRootLogin/d' -i /etc/ssh/sshd_config
 echo -e 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+echo -e '!!!!!!!!!!!!!!! Postav ip 192.168.10.2 mask 30 na ens192, gateway 192.168.10.1, dns 172.16.20.10, domain itnsa39.wsr'
+echo -e '!!!!!!!!!!!!!!! Postav ip 192.168.100.1 mask 24 na ens224, gateway ne nado, dns 172.16.20.10, domain itnsa39.wsr'

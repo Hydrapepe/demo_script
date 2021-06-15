@@ -31,3 +31,4 @@ sed '/hosts/d' -i /etc/nsswitch.conf
 echo -e 'hosts:\tdns files myhostname' >> /etc/nsswitch.conf
 sed '/PermitRootLogin/d' -i /etc/ssh/sshd_config
 echo -e 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+echo -e '!!!!!!!!!!!!!!! Postav ip 192.168.100.100 mask 24 na ens192, gateway 192.168.100.1, dns 172.16.20.10, domain itnsa39.wsr'
