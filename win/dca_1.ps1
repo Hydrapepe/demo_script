@@ -20,7 +20,7 @@ $action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument 'C:\\dca_1
 $trigger = New-ScheduledTaskTrigger -AtLogon
 Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "PEPETEST2"
 Unregister-ScheduledTask -TaskName "PEPETEST1" -Confirm:$false
-Add-Computer -DomainName kazan.wsr -Credential KAZAN\Administrator -restart -force
+Add-Computer -DomainName Kazan.wsr -Credential KAZAN\Administrator -restart -force
 }
 function three {
 Unregister-ScheduledTask -TaskName "PEPETEST2" -Confirm:$false
@@ -31,7 +31,7 @@ Add-WindowsFeature Adcs-Web-Enrollment
 Install-WindowsFeature -name Web-Server -IncludeManagementTools
 Install-WindowsFeature -Name NET-Framework-45-ASPNET
 Enable-WindowsOptionalFeature -Online -FeatureName IIS-ManagementService
-Install-AdcsCertificationAuthority -Credential KAZAN\Administrator -CACommonName "RootKazanCA" -CADistinguishedNameSuffix "DC=kazan,DC=wsr" -LogDirectory "C:\Windows\System32\CertLog" -DatabaseDirectory "C:\Windows\System32\CertLog" -CAType EnterpriseRootCa -CryptoProviderName "RSA#Microsoft Software Key Storage Provider" -KeyLength 2048 -HashAlgorithmName SHA256 -ValidityPeriod Years -ValidityPeriodUnits 8 -Force
+Install-AdcsCertificationAuthority -Credential KAZAN\Administrator -CACommonName "RootCA" -CADistinguishedNameSuffix "DC=Kazan,DC=wsr" -LogDirectory "C:\Windows\System32\CertLog" -DatabaseDirectory "C:\Windows\System32\CertLog" -CAType EnterpriseRootCa -CryptoProviderName "RSA#Microsoft Software Key Storage Provider" -KeyLength 2048 -HashAlgorithmName SHA256 -ValidityPeriod Months -ValidityPeriodUnits 23 -Force
 Restart-Computer -Force
 }
 if($Stage -eq 1) 

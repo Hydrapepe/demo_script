@@ -20,11 +20,11 @@ $action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument 'C:\\srv1_
 $trigger = New-ScheduledTaskTrigger -AtLogon
 Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "PEPETEST2"
 Unregister-ScheduledTask -TaskName "PEPETEST1" -Confirm:$false
-cmd /c '(echo select volume 0 && echo assign letter=P && echo select disk 1 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo select disk 2 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo select disk 3 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo select disk 4 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo create volume raid disk=1,2,3,4 && echo format fs=ntfs label="RAID" && echo assign letter=D && echo format quick) > 1.txt && diskpart /s 1.txt'
+cmd /c '(echo select volume 0 && echo assign letter=P && echo select disk 1 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo select disk 2 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo select disk 3 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo select disk 4 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic) > 1.txt && diskpart /s 1.txt'
 cmd /c 'mkdir D:\shares\departments\it'
 cmd /c 'mkdir D:\shares\departments\sales'
 cmd /c 'mkdir D:\shares\it'
-Add-Computer -DomainName kazan.wsr -Credential KAZAN\Administrator -restart -force
+Add-Computer -DomainName Kazan.wsr -Credential KAZAN\Administrator -restart -force
 }
 function three {
 $User = "KAZAN\Administrator"
@@ -37,7 +37,7 @@ Add-DHCPServerSecurityGroup -ComputerName $env:COMPUTERNAME
 Restart-Service dhcpserver
 Add-WindowsFeature –Name AD-Domain-Services –IncludeAllSubFeature –IncludeManagementTools
 Import-Module ADDSDeployment
-Install-ADDSDomainController -NoGlobalCatalog:$false -Credential $Credential -CriticalReplicationOnly:$false -DatabasePath "C:\Windows\NTDS" -DelegatedAdministratorAccountName "KAZAN\Administrator" -DomainName "kazan.wsr" -InstallDns:$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:$false -ReadOnlyReplica:$true -ReplicationSourceDC "DC1.kazan.wsr" -SiteName "Default-First-Site-Name" -SysvolPath "C:\Windows\SYSVOL" -Force:$true
+Install-ADDSDomainController -NoGlobalCatalog:$false -Credential $Credential -CriticalReplicationOnly:$false -DatabasePath "C:\Windows\NTDS" -DelegatedAdministratorAccountName "KAZAN\Administrator" -DomainName "Kazan.wsr" -InstallDns:$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:$false -ReadOnlyReplica:$true -ReplicationSourceDC "DC1.Kazan.wsr" -SiteName "Default-First-Site-Name" -SysvolPath "C:\Windows\SYSVOL" -Force:$true
 }
 if($Stage -eq 1) 
 {

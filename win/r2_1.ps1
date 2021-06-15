@@ -19,7 +19,7 @@ Restart-Computer -Force
 }
 function two {
 Unregister-ScheduledTask -TaskName "PEPETEST1" -Confirm:$false
-Add-Computer -DomainName SPB.wsr -Credential SPB\Administrator -restart -force
+Add-Computer -DomainName SPB.wse -Credential SPB\Administrator -restart -force
 }
 if($Stage -eq 1) 
 {

@@ -19,7 +19,7 @@ Restart-Computer -Force
 }
 function two {
 Unregister-ScheduledTask -TaskName "PEPETEST1" -Confirm:$false
-Add-Computer -DomainName kazan.wsr -Credential KAZAN\Administrator -restart -force
+Add-Computer -DomainName Kazan.wsr -Credential KAZAN\Administrator -restart -force
 }
 if($Stage -eq 1) 
 {
