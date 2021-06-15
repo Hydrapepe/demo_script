@@ -20,7 +20,7 @@ $action = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument 'C:\\srv1_
 $trigger = New-ScheduledTaskTrigger -AtLogon
 Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "PEPETEST2"
 Unregister-ScheduledTask -TaskName "PEPETEST1" -Confirm:$false
-cmd /c '(echo select volume 0 && echo assign letter=P && echo select disk 1 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo select disk 2 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo select disk 3 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo select disk 4 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic) > 1.txt && diskpart /s 1.txt'
+cmd /c '(echo select volume 0 && echo assign letter=P && echo select disk 1 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo select disk 2 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo select disk 3 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo select disk 4 && echo online disk && echo ATTRIBUTES DISK CLEAR READONLY && echo convert dynamic && echo create volume mirror disk=1,2 && echo format fs=ntfs label="RAID-1" && echo assign letter=D && echo format quick) > 1.txt && diskpart /s 1.txt'
 cmd /c 'mkdir D:\shares\departments\it'
 cmd /c 'mkdir D:\shares\departments\sales'
 cmd /c 'mkdir D:\shares\it'

@@ -49,6 +49,14 @@ GPO
 ############
 
 #####
+Start stranica brauzera spb.wse
+#####
+Mount Additional.iso - Install exe to C:\Windows\SYSVOL\domain\Policies\
+User Config/Policies/Admin templates/Windows Components/Internet Explorer/Disable changing home page settings
+User Config/Policies/Admin templates/Windows Components/Microsoft Edge/Configure home pages
+Link gpo to IT and Sales OU
+
+#####
 IT local admin in clients
 #####
 Computer Config/Preferences/Control Panel/Local Users and Groups
@@ -66,3 +74,4 @@ New item - computer name - cli1
 Delete korzina
 #####
 User Config/Admin Templates/Desktop/Delete icon Recycle Bin
+Link gpo to cli1
