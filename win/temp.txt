@@ -10,3 +10,26 @@ del C:\inetpub\wwwroot\iisstart.png
 
 
 Import-PfxCertificate -FilePath c:\sslcert.pfx -CertStoreLocation Cert:\LocalMachine\My\ -Password (ConvertTo-SecureString 'P@ssw0rd' -AsPlainText -Force)
+
+############
+GPO 
+############
+
+#####
+IT local admin in clients
+#####
+Computer Config/Preferences/Control Panel/Local Users and Groups
+PKM po etomu punktu - New - Local Group
+
+Vkladky
+[Local Group]
+Group name - Administrators (built-in)
+Add - KAZAN\IT
+
+[Common]
+New item - computer name - cli1
+
+#####
+Delete korzina
+#####
+User Config/Admin Templates/Desktop/Delete icon Recycle Bin
