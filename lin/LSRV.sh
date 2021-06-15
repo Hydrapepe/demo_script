@@ -40,30 +40,30 @@ options {
 mkdir /opt/dns
 echo -e '
 $TTL	604800
-@	IN	SOA	itnsa39.wsr. root.itnsa39.wsr. (
+@		IN	SOA	itnsa39.wsr. root.itnsa39.wsr. (
 			      2		; Serial
 			 604800		; Refresh
 			  86400		; Retry
 			2419200		; Expire
 			 604800 )	; Negative Cache TTL
 ;
-@	IN	NS	l-srv.itnsa39.wsr.
+@		IN	NS	l-srv.itnsa39.wsr.
 l-srv	IN	A	172.16.20.10
 server	IN	CNAME	l-srv.itnsa39.wsr.
 l-fw	IN	A	10.10.10.1
 r-fw	IN	A	20.20.20.100
-www	IN	CNAME	r-fw.itnsa39.wsr.
+www		IN	CNAME	r-fw.itnsa39.wsr.
 r-srv	IN	A	192.168.20.10' > /opt/dns/itnsa39.db
 echo -e '
 $TTL	604800
-@	IN	SOA	itnsa39.wsr. root.itnsa39.wsr. (
+@		IN	SOA	itnsa39.wsr. root.itnsa39.wsr. (
 			      1		; Serial
 			 604800		; Refresh
 			  86400		; Retry
 			2419200		; Expire
 			 604800 )	; Negative Cache TTL
 ;
-@	IN	NS	l-srv.itnsa39.wsr.
+@		IN	NS	l-srv.itnsa39.wsr.
 10.20	IN	PTR	l-srv.itnsa39.wsr.' > /opt/dns/172.db
 echo -e '
 $TTL	604800
@@ -74,7 +74,7 @@ $TTL	604800
 			2419200		; Expire
 			 604800 )	; Negative Cache TTL
 ;
-@	IN	NS	l-srv.itnsa39.wsr.
+@		IN	NS	l-srv.itnsa39.wsr.
 10.20	IN	PTR	l-srv.itnsa39.wsr.' > /opt/dns/192.db
 chown -R bind:bind /opt/dns
 chown -R bind:bind /opt/dns/
