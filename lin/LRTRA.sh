@@ -1,7 +1,7 @@
 #!/bin/bash
 apt-cdrom add
 hostnamectl set-hostname L-RTR-A
-apt install -y tcpdump net-tools curl vim lynx isc-dhcp-common dnsutils nfs-common cifs-utils sshpass openssh-server bash-completion isc-dhcp-server
+apt install -y tcpdump net-tools curl vim lynx isc-dhcp-common dnsutils nfs-common cifs-utils sshpass openssh-server bash-completion isc-dhcp-server iptables-persistent
 echo "172.16.20.10    l-srv   l-srv.skill39.wsr
 10.10.10.1      l-fw    l-fw.skill39.wsr
 172.16.50.2     l-rtr-a l-rtr-a.skill39.wsr

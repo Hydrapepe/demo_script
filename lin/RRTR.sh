@@ -15,7 +15,7 @@ mkdir /media/cdrom
 mkdir /media/CentOS
 mount /dev/sr0 /media/cdrom
 mount /dev/sr1 /media/CentOS
-yum -y install tcpdump net-tools curl vim lynx dhclient bind-utils nfs-utils cifs-utils nano bash-completion mc
+yum -y install tcpdump net-tools curl vim lynx dhclient bind-utils nfs-utils cifs-utils nano bash-completion mc iptables iptables-services
 echo -e "\n172.16.20.10    l-srv   l-srv.skill39.wsr" >> /etc/hosts
 echo "10.10.10.1      l-fw    l-fw.skill39.wsr" >> /etc/hosts
 echo "172.16.50.2     l-rtr-a l-rtr-a.skill39.wsr" >> /etc/hosts

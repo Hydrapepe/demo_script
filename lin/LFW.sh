@@ -1,7 +1,7 @@
 #!/bin/bash
 apt-cdrom add
 hostnamectl set-hostname L-FW
-apt install -y tcpdump net-tools curl vim lynx isc-dhcp-common dnsutils nfs-common cifs-utils sshpass openssh-server bash-completion
+apt install -y tcpdump net-tools curl vim lynx isc-dhcp-common dnsutils nfs-common cifs-utils sshpass openssh-server bash-completion iptables-persistent
 iptables-persistent
 echo -e "\n172.16.20.10    l-srv   l-srv.skill39.wsr" >> /etc/hosts
 echo "10.10.10.1      l-fw    l-fw.skill39.wsr" >> /etc/hosts
