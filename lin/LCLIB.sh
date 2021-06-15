@@ -22,3 +22,13 @@ iface lo inet loopback
 auto ens192
 iface ens192 inet dhcp" > /etc/network/interfaces
 systemctl disable --now apparmor
+echo parol666 > /etc/pass
+chmod 400 /etc/pass
+mkdir /root/sync
+echo -e '
+#!/bin/bash
+rsync -avz --password-file /etc/pass -O /root/sync sync@l-srv.skill39.wsr::data
+' > /root/sync.sh
+chmod +x /root/sync.sh
+echo -e '!!!!!!!!!!!! NE zabud proverit rsync 
+zapusti ./root/sync.sh kogda zapustish vse sripty'
