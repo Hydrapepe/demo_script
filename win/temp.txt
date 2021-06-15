@@ -13,9 +13,27 @@ Import-PfxCertificate -FilePath c:\sslcert.pfx -CertStoreLocation Cert:\LocalMac
 
 
 ######
+R1
+######
+Install RRAS (Remote Access - Routing) na R1, R2 i DC1
+Select R1 - Routing and Remote Access - Add Server - R1 - Select R1 - Configure and Enable Routing
+Custom Configuration - Lan routing galka - Check IP and interfaces (ipconfig)
+Select R1 - IPv4 - Static Route - Pkm - New Static Route
+Interface (Ethernet1) Destination 172.16.20.0 mask 255.255.255.224 
+gateway 200.100.100.2 
+
+
+######
+R2
+######
+Interface (Ethernet1) Desination 172.16.19.0 mask 255.255.255.192
+gateway 200.100.100.1
+
+
+######
 DCA sertificaty
 ######
-Install webserver/ad cs
+Install webserver i ad cs
 Server manager - tools -certificatation authority - pkm na certificate templates - manage
 Ishem shablon Computer i pkm po nemu Duplicate Templates
 Vkladka general - Template name ClientComputer
