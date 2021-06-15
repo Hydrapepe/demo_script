@@ -24,6 +24,7 @@ cmd /c '(echo select volume 0 && echo assign letter=P && echo select disk 1 && e
 cmd /c 'mkdir D:\shares\departments\it'
 cmd /c 'mkdir D:\shares\departments\sales'
 cmd /c 'mkdir D:\shares\it'
+cmd /c 'mkdir D:\shares\redirected'
 Add-Computer -DomainName Kazan.wsr -Credential KAZAN\Administrator -restart -force
 }
 function three {

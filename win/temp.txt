@@ -49,6 +49,27 @@ GPO
 ############
 
 #####
+Domashnie papki IT
+#####
+create share shares/it in files and storage services
+go to users and computers and select all IT users in IT OU - properties
+galka home folder - connect Y: - \\srv1\it\%username%
+
+#####
+obshie papki
+#####
+create shares for departments it and sales
+create gpo - user config/preferences/drive maps - new - mapped drive
+action (update) - reconnect galka - location \\srv1\departments\it - use Y:
+vkladka common - item-level targeting - targeting - new item - security group - KAZAN\IT
+dlya sales tozhe samoe
+
+####
+redirect papok
+####
+user config/policies/windows settings/folder redirection
+
+#####
 Start stranica brauzera spb.wse
 #####
 Mount Additional.iso - Install exe to C:\Windows\SYSVOL\domain\Policies\
