@@ -11,6 +11,21 @@ del C:\inetpub\wwwroot\iisstart.png
 
 Import-PfxCertificate -FilePath c:\sslcert.pfx -CertStoreLocation Cert:\LocalMachine\My\ -Password (ConvertTo-SecureString 'P@ssw0rd' -AsPlainText -Force)
 
+
+######
+DCA sertificaty
+######
+Install webserver/ad cs
+Server manager - tools -certificatation authority - pkm na certificate templates - manage
+Ishem shablon Computer i pkm po nemu Duplicate Templates
+Vkladka general - Template name ClientComputer
+Vkladka security - Add - Computer - R1 i SRV1 - Autoenroll galochka
+Vkladka subject name - Subject name = common name - Ok - Zakryvaem
+Pkm po Certificate template - new - certificate template to issue
+Vybrat' ClientComputers - ok
+
+Dly IT tozhe samoe tolko shablon User i imya ITUsers
+
 ############
 GPO 
 ############
