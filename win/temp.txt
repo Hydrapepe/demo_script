@@ -44,6 +44,9 @@ Vybrat' ClientComputers - ok
 
 Dly IT tozhe samoe tolko shablon User i imya ITUsers
 
+S DCA copy root certificat iz \\dca.kazan.wsr\CertEnroll and copy to DC2
+Create gpo na DC2 in Comp Config/Windows Settings/Security Settings/Public Key Polices/
+Trusted root cert - pkm na nem - import
 ############
 GPO 
 ############
