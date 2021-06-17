@@ -1,7 +1,7 @@
 #!/bin/bash
 apt-cdrom add
 hostnamectl set-hostname L-FW
-apt install -y tcpdump net-tools curl vim lynx isc-dhcp-common dnsutils nfs-common cifs-utils sshpass openssh-server bash-completion
+apt install -y tcpdump wget net-tools curl vim lynx isc-dhcp-common dnsutils nfs-common cifs-utils sshpass openssh-server bash-completion
 iptables-persistent
 echo -e "\n172.16.20.10    l-srv   l-srv.demo2020.wsr" >> /etc/hosts
 echo "10.10.10.1      l-fw    l-fw.demo2020.wsr" >> /etc/hosts

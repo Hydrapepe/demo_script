@@ -15,7 +15,7 @@ mkdir /media/cdrom
 mkdir /media/CentOS
 mount /dev/sr0 /media/cdrom
 mount /dev/sr1 /media/CentOS
-yum -y install tcpdump net-tools curl vim lynx dhclient bind-utils nfs-utils cifs-utils nano bash-completion mc
+yum -y install tcpdump wget net-tools curl vim lynx dhclient bind-utils nfs-utils cifs-utils nano bash-completion mc iptables iptables-services
 echo -e "\n172.16.20.10    l-srv   l-srv.demo2020.wsr" >> /etc/hosts
 echo "10.10.10.1      l-fw    l-fw.demo2020.wsr" >> /etc/hosts
 echo "172.16.50.2     l-rtr-a l-rtr-a.demo2020.wsr" >> /etc/hosts
@@ -27,35 +27,13 @@ echo "192.168.20.10   r-srv   r-srv.demo2020.wsr" >> /etc/hosts
 echo "192.168.10.2    r-rtr   r-rtr.demo2020.wsr" >> /etc/hosts
 echo "192.168.100.100 r-cli   r-cli.demo2020.wsr" >> /etc/hosts
 echo "10.10.10.10     isp" >> /etc/hosts
-#
 sed '/hosts/d' -i /etc/nsswitch.conf
 echo -e 'hosts:\tdns files myhostname' >> /etc/nsswitch.conf
-#
 sed '/PermitRootLogin/d' -i /etc/ssh/sshd_config
 echo -e 'PermitRootLogin yes' >> /etc/ssh/sshd_config
 systemctl disable --now firewalld
 sed '/SELINUX/d' -i /etc/selinux/config
 echo -e 'SELINUX=disabled' >> /etc/selinux/config
-#
-echo -e "
-TYPE=ETHERNET
-PROXY_METHOD=none
-BROWSER_ONLY=no
-BOOTPROTO=nope
-DEFROUTE=yes
-IPV4_FAILURE_FATAL=no
-IPV6INIT=no
-IPV6_AUTOCONF=yes
-IPV6_DEFROUTE=yes
-IPV6_FAILURE_FATAL=no
-IPV6_ADDR_GEN_MODE=stable-privacy
-NAME=ens192
-DEVICE=ens192
-ONBOOT=yes
-IPADDR=20.20.20.5
-GATEWAY=20.20.20.10
-PREFIX=24
-DNS1=172.16.20.10
-DOMAIN=demo2020.wsr" > /etc/sysconfig/network-scripts/ifcfg-ens192
-echo -e '!!!!!!!!!!!!!!! POSLE USTANOVKI SCRIPTA l-FW NE ZABUD zapustit ssh-keygen'
-echo -e '!!!!!!!!!!!!!!!  i eto      ssh-copy-id ssh_p@10.10.10.1'
+echo -e '\033[0;31m !!!!!!!!!!!!!!! Postav ip 20.20.20.5 mask 24 na ens192, gateway 20.20.20.10, dns 172.16.20.10, domain demo2020.wsr  \033[0m'
+echo -e '\033[0;31m !!!!!!!!!!!!!!! POSLE USTANOVKI SCRIPTA l-FW NE ZABUD zapustit ssh-keygen  \033[0m'
+echo -e '\033[0;31m !!!!!!!!!!!!!!!  i eto      ssh-copy-id ssh_p@10.10.10.1  \033[0m'
