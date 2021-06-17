@@ -51,7 +51,7 @@ echo -e 'authoritative;' >> /etc/dhcp/dhcpd.conf
 sed '/option domain-name/d' -i /etc/dhcp/dhcpd.conf
 echo -e 'option domain-name "demo2020.wsr";' >> /etc/dhcp/dhcpd.conf
 sed '/option domain-name-servers/d' -i /etc/dhcp/dhcpd.conf
-echo -e 'option domain-name-servers "172.16.20.10";' >> /etc/dhcp/dhcpd.conf
+echo -e 'option domain-name-servers 172.16.20.10;' >> /etc/dhcp/dhcpd.conf
 sed '/ddns-update-style/d' -i /etc/dhcp/dhcpd.conf
 echo -e 'ddns-update-style interim;' >> /etc/dhcp/dhcpd.conf
 echo -e 'update-static-leases on;' >> /etc/dhcp/dhcpd.conf
