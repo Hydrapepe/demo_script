@@ -27,7 +27,7 @@ chmod 400 /etc/pass
 mkdir /root/sync
 echo -e '
 #!/bin/bash
-rsync -avz --password-file /etc/pass -O /root/sync sync@l-srv.skill39.wsr::data
+rsync -avz --password-file /etc/pass -O /root/sync sync@l-srv.demo2020.wsr::data
 ' > /root/sync.sh
 chmod +x /root/sync.sh
 echo -e '!!!!!!!!!!!! NE zabud proverit rsync 
