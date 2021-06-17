@@ -17,7 +17,7 @@ mount /dev/sr0 /media/cdrom
 mount /dev/sr1 /media/CentOS
 yum -y install tcpdump net-tools curl vim lynx dhclient bind-utils nfs-utils cifs-utils nano bash-completion mc iptables iptables-services
 echo -e "\n172.16.20.10    l-srv   l-srv.itnsa39.wsr" >> /etc/hosts
-echo "10.10.10.1      l-fw    l-fw.itnsa39.wsr" >> /etc/hosts
+echo "10.10.10.1      l-fw    l-fw.demo2020.wsr" >> /etc/hosts
 echo "172.16.50.2     l-rtr-a l-rtr-a.itnsa39.wsr" >> /etc/hosts
 echo "172.16.55.2     l-rtr-b l-rtr-b.itnsa39.wsr" >> /etc/hosts
 echo "172.16.200.61   l-cli-b l-cli-b.itnsa39.wsr" >> /etc/hosts
